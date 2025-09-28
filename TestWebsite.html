@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Software Test Lead & Automation Expert</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        main {
+            padding-top: 80px;
+        }
+
+        .hero {
+            padding: 5rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #667eea;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            right: 10%;
+            top: 60%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            left: 70%;
+            top: 10%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">Your Name</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Software Test Lead</h1>
+                <p class="subtitle">Automation Testing Expert & Future SDET/Developer</p>
+                <p class="tagline">Transforming quality assurance through innovative automation solutions and continuous learning</p>
+                <a href="#skills" class="cta-button">Explore My Skills</a>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2>Technical Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h3>🔧 Test Automation</h3>
+                        <p>Leading automated testing initiatives with comprehensive framework design and implementation. Expert in building scalable, maintainable test suites that accelerate delivery cycles.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Selenium</span>
+                            <span class="tag">Cypress</span>
+                            <span class="tag">Playwright</span>
+                            <span class="tag">TestNG</span>
+                            <span class="tag">Jest</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>👨‍💼 Leadership & Strategy</h3>
+                        <p>Experienced in leading QA teams, defining testing strategies, and implementing quality processes that align with business objectives and development workflows.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Team Leadership</span>
+                            <span class="tag">Test Planning</span>
+                            <span class="tag">Agile/Scrum</span>
+                            <span class="tag">Risk Assessment</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>💻 Development Skills</h3>
+                        <p>Building strong programming foundations to transition into SDET/Developer roles. Focused on writing clean, efficient code and understanding software architecture.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">SQL</span>
+                            <span class="tag">Git</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>🚀 CI/CD & DevOps</h3>
+                        <p>Implementing continuous testing practices and integrating quality gates into deployment pipelines for faster, more reliable software delivery.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Jenkins</span>
+                            <span class="tag">GitHub Actions</span>
+                            <span class="tag">Docker</span>
+                            <span class="tag">AWS</span>
+                            <span class="tag">API Testing</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>📱 Cross-Platform Testing</h3>
+                        <p>Expertise in testing across web, mobile, and API platforms ensuring consistent user experiences and functionality across all touchpoints.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Web Testing</span>
+                            <span class="tag">Mobile Testing</span>
+                            <span class="tag">API Testing</span>
+                            <span class="tag">Cross-browser</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>📊 Quality Metrics</h3>
+                        <p>Data-driven approach to quality assurance with comprehensive reporting, metrics analysis, and continuous improvement of testing processes.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Test Reporting</span>
+                            <span class="tag">Metrics Analysis</span>
+                            <span class="tag">Defect Tracking</span>
+                            <span class="tag">Process Improvement</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2>Featured Projects & Achievements</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Enterprise Test Automation Framework</h3>
+                        </div>
+                        <div class="project-body">
+                            <p>Designed and implemented a comprehensive test automation framework that reduced testing time by 70% and increased test coverage by 45%. Built with modular architecture supporting multiple browsers and environments.</p>
+                            <div class="skill-tags">
+                                <span class="tag">Selenium WebDriver</span>
+                                <span class="tag">Java</span>
+                                <span class="tag">TestNG</span>
+                                <span class="tag">Maven</span>
+                            </div>
+                            <a href="#" class="project-link">View Details →</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>CI/CD Testing Pipeline</h3>
+                        </div>
+                        <div class="project-body">
+                            <p>Integrated automated testing into CI/CD pipeline, enabling continuous quality feedback. Implemented parallel test execution and intelligent test selection reducing build times significantly.</p>
+                            <div class="skill-tags">
+                                <span class="tag">Jenkins</span>
+                                <span class="tag">Docker</span>
+                                <span class="tag">GitHub Actions</span>
+                                <span class="tag">Parallel Testing</span>
+                            </div>
+                            <a href="#" class="project-link">View Details →</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>API Testing Suite</h3>
+                        </div>
+                        <div class="project-body">
+                            <p>Developed comprehensive API testing framework with automated validation of REST services, including contract testing, performance validation, and security testing.</p>
+                            <div class="skill-tags">
+                                <span class="tag">REST Assured</span>
+                                <span class="tag">Postman</span>
+                                <span class="tag">JSON Schema</span>
+                                <span class="tag">Performance Testing</span>
+                            </div>
+                            <a href="#" class="project-link">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="container">
+                <h2>Let's Connect</h2>
+                <p>Ready to discuss testing strategies, automation solutions, or potential opportunities? I'd love to hear from you!</p>
+                <div class="contact-links">
+                    <a href="mailto:lukejames027@gmail.com" class="contact-link">📧 Email</a>
+                    <a href="https://www.linkedin.com/in/lukejames27/" class="contact-link">💼 LinkedIn</a>
+                    <a href="https://github.com/LukeJ27" class="contact-link">💻 GitHub</a>
+                    <a href="tel:+447881376794" class="contact-link">📱 Phone</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        });
+
+        // Animate skill cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initially hide cards for animation
+        document.querySelectorAll('.skill-card, .project-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
