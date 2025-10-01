@@ -307,7 +307,7 @@
             }
 
             .experience-timeline::before {
-                left: 1rem;
+                left: 0.5rem;
             }
 
             .experience-item {
@@ -321,24 +321,34 @@
 
             .experience-content {
                 width: 100%;
-                padding-right: 0;
-                padding-left: 2.5rem;
+                padding-left: 2rem;
+                padding-right: 0.5rem;
             }
 
             .experience-item:nth-child(even) .experience-content {
                 width: 100%;
-                padding-right: 0;
-                padding-left: 2.5rem;
+                padding-left: 2rem;
+                padding-right: 0.5rem;
             }
 
             .timeline-dot {
-                left: 1rem;
+                left: 0.5rem;
                 transform: translateX(0);
             }
 
             .experience-item:nth-child(even) .timeline-dot {
-                left: 1rem;
+                left: 0.5rem;
                 transform: translateX(0);
+            }
+
+            .experience-desc li {
+                padding-left: 1.5rem;
+                padding-right: 0;
+            }
+
+            .experience-desc li::before {
+                left: 0;
+                right: auto;
             }
 
             .experience-item:nth-child(even) .experience-desc li {
@@ -385,7 +395,7 @@
                 <a href="#about" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">About</a>
                 <a href="#skills" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Skills</a>
                 <a href="#projects" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Projects</a>
-                <a href="#experience" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Experience</a>
+                <a href="#experience" class="nav-link text-glass-600 hover:text-blue-600 font-medium transition-all">Experience</a>
                 <a href="#achievements" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Achievements</a>
                 <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Contact</a>
             </nav>
