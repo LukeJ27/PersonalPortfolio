@@ -412,8 +412,8 @@
             <h1 class="hero-title text-6xl font-extrabold animate-fade-in mb-4">Luke James</h1>
             <p class="text-2xl mb-8 opacity-90 animate-fade-in" style="animation-delay: 0.2s;">Test Lead & QA Automation Engineer</p>
             <div class="flex justify-center gap-4 flex-wrap">
-                <a href="#contact" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-opacity-90 transition-all hover-scale glow-effect animate-fade-in no-scroll" style="animation-delay: 0.4s;">Get in Touch</a>
-                <a href="/PersonalPortfolio/Luke_James_CV.pdf" download class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all hover-scale glow-effect animate-fade-in no-scroll" style="animation-delay: 0.5s;">Download CV</a>
+                <a href="#contact" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-opacity-90 transition-all hover-scale glow-effect animate-fade-in no-scroll" style="animation-delay: 0.4s;" onclick="handleHeroClick(event, this)">Get in Touch</a>
+                <a href="/PersonalPortfolio/Luke_James_CV.pdf" download class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all hover-scale glow-effect animate-fade-in no-scroll" style="animation-delay: 0.5s;" onclick="handleHeroClick(event, this)">Download CV</a>
             </div>
         </div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30v4h-4v2h4v4h2v-4h4v-2h-4V4h-2zM6 34v4h4v-4h4v-2h-4v-4h-2v4H6v2zm0-30v2h4v4h2V6h4V4H6v2z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] animate-pulse opacity-20"></div>
@@ -714,151 +714,178 @@
     </footer>
 
     <script>
-        // Generate Particles
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 20; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = `${Math.random() * 100}vw`;
-            particle.style.top = `${Math.random() * 100}vh`;
-            particle.style.animationDelay = `${Math.random() * 5}s`;
-            particle.style.animationDuration = `${8 + Math.random() * 10}s`;
-            particlesContainer.appendChild(particle);
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Generate Particles
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particle.style.animationDuration = `${8 + Math.random() * 10}s`;
+                particlesContainer.appendChild(particle);
+            }
 
-        // Hamburger Menu Toggle
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Close Menu on Link Click
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
+            // Hamburger Menu Toggle
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
             });
-        });
 
-        // Smooth Scrolling (Exclude no-scroll class)
-        document.querySelectorAll('a[href^="#"]:not(.no-scroll)').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href.startsWith('#') && href !== '#' && document.querySelector(href)) {
-                    e.preventDefault();
-                    document.querySelector(href).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+            // Close Menu on Link Click
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Smooth Scrolling (Exclude no-scroll class)
+            document.querySelectorAll('a[href^="#"]:not(.no-scroll)').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.startsWith('#') && href !== '#' && document.querySelector(href)) {
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Specific Handler for Hero Buttons with Enhanced Debugging
+            const heroButtons = document.querySelectorAll('#hero a.no-scroll');
+            console.log('Hero buttons initialized:', heroButtons); // Debug initialization
+            heroButtons.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    console.log('Hero button clicked:', href); // Debug click
+                    if (href === '#contact') {
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    } else if (this.hasAttribute('download')) {
+                        console.log('Download triggered:', href);
+                        // Fallback to ensure download
+                        const link = document.createElement('a');
+                        link.href = href;
+                        link.download = 'Luke_James_CV.pdf';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                });
+            });
+
+            // Intersection Observer for Animations
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                        entry.target.querySelectorAll('.progress-fill').forEach(fill => {
+                            fill.classList.add('active');
+                        });
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section, .experience-item, .achievement-item, .project-details').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Parallax Effect
+            window.addEventListener('scroll', () => {
+                const hero = document.querySelector('#hero');
+                if (hero) {
+                    const scrollPosition = window.pageYOffset;
+                    hero.style.backgroundPositionY = `${scrollPosition * 0.4}px`;
                 }
             });
-        });
 
-        // Specific Handler for Hero Buttons with Debugging
-        document.querySelectorAll('#hero a.no-scroll').forEach(link => {
-            link.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                console.log('Hero button clicked:', href); // Debug log
+            // Web Audio for Hover Effects
+            let audioContext;
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                console.log('Web Audio API not supported');
+            }
+
+            function playHoverSound() {
+                if (!audioContext) return;
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(900, audioContext.currentTime);
+                gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.12);
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.12);
+            }
+
+            document.querySelectorAll('.hover-scale, .nav-link').forEach(el => {
+                el.addEventListener('mouseenter', playHoverSound);
+            });
+
+            // Typing Animation for Hero Title
+            const heroTitle = document.querySelector('#hero h1');
+            const text = heroTitle.textContent;
+            heroTitle.textContent = '';
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    heroTitle.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, 60);
+                }
+            }
+            setTimeout(type, 500);
+
+            // Dark Mode Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark');
+                themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+                localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+            });
+
+            // Load Theme Preference
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark');
+                themeToggle.textContent = '☀️';
+            }
+
+            // Project Toggle
+            document.querySelectorAll('.project-toggle').forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+                    const details = document.getElementById(targetId);
+                    details.classList.toggle('active');
+                    button.textContent = details.classList.contains('active') ? 'Hide Details' : 'Show Details';
+                });
+            });
+
+            // Inline Handler Function
+            window.handleHeroClick = function (e, element) {
+                e.preventDefault();
+                const href = element.getAttribute('href');
+                console.log('Inline handler triggered:', href);
                 if (href === '#contact') {
-                    e.preventDefault();
-                    document.querySelector(href).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                } else if (this.hasAttribute('download')) {
-                    // Allow download to proceed naturally
-                    console.log('Download triggered:', href);
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                } else if (element.hasAttribute('download')) {
+                    const link = document.createElement('a');
+                    link.href = href;
+                    link.download = 'Luke_James_CV.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
                 }
-            });
-        });
-
-        // Intersection Observer for Animations
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in');
-                    entry.target.querySelectorAll('.progress-fill').forEach(fill => {
-                        fill.classList.add('active');
-                    });
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('section, .experience-item, .achievement-item, .project-details').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Parallax Effect
-        window.addEventListener('scroll', () => {
-            const hero = document.querySelector('#hero');
-            if (hero) {
-                const scrollPosition = window.pageYOffset;
-                hero.style.backgroundPositionY = `${scrollPosition * 0.4}px`;
-            }
-        });
-
-        // Web Audio for Hover Effects
-        let audioContext;
-        try {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        } catch (e) {
-            console.log('Web Audio API not supported');
-        }
-
-        function playHoverSound() {
-            if (!audioContext) return;
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(900, audioContext.currentTime);
-            gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.12);
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.12);
-        }
-
-        document.querySelectorAll('.hover-scale, .nav-link').forEach(el => {
-            el.addEventListener('mouseenter', playHoverSound);
-        });
-
-        // Typing Animation for Hero Title
-        const heroTitle = document.querySelector('#hero h1');
-        const text = heroTitle.textContent;
-        heroTitle.textContent = '';
-        let i = 0;
-        function type() {
-            if (i < text.length) {
-                heroTitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(type, 60);
-            }
-        }
-        setTimeout(type, 500);
-
-        // Dark Mode Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-            themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
-            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-        });
-
-        // Load Theme Preference
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark');
-            themeToggle.textContent = '☀️';
-        }
-
-        // Project Toggle
-        document.querySelectorAll('.project-toggle').forEach(button => {
-            button.addEventListener('click', () => {
-                const targetId = button.getAttribute('data-target');
-                const details = document.getElementById(targetId);
-                details.classList.toggle('active');
-                button.textContent = details.classList.contains('active') ? 'Hide Details' : 'Show Details';
-            });
+            };
         });
     </script>
 </body>
