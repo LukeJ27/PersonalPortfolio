@@ -10,12 +10,14 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e40af; /* Deep Blue for contrast */
+            --primary: #1e40af; /* Deep Blue */
             --secondary: #4b5563; /* Soft Gray */
-            --accent: #06b6d4; /* Cyan for highlights */
-            --bg: #f8fafc; /* Light Slate for background */
-            --text: #1e293b; /* Dark Slate for readable text */
+            --accent: #06b6d4; /* Cyan */
+            --bg: #f8fafc; /* Light Slate */
+            --text: #1e293b; /* Dark Slate */
             --gradient: linear-gradient(135deg, #1e40af, #06b6d4);
+            --dark-bg: #1e293b;
+            --dark-text: #f1f5f9;
         }
 
         body {
@@ -25,9 +27,33 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            transition: background 0.3s, color 0.3s;
         }
 
-        /* Animated Background Particles */
+        body.dark {
+            background: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        body.dark .glass {
+            background: rgba(30, 41, 59, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark .glass:hover {
+            background: rgba(30, 41, 59, 0.3);
+        }
+
+        body.dark .progress-bar {
+            background: #4b5563;
+        }
+
+        body.dark h1, body.dark h2, body.dark h3, body.dark p, body.dark li {
+            color: var(--dark-text);
+            text-shadow: none;
+        }
+
+        /* Particles Background */
         .particles {
             position: fixed;
             top: 0;
@@ -71,6 +97,26 @@
             animation: glow 2s ease-in-out infinite;
         }
 
+        /* Nav Link Animation */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
         /* Glassmorphism */
         .glass {
             background: rgba(255, 255, 255, 0.2);
@@ -93,7 +139,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* Gradient Text (used sparingly) */
+        /* Gradient Text (sparingly) */
         .gradient-text {
             background: var(--gradient);
             -webkit-background-clip: text;
@@ -120,7 +166,7 @@
             opacity: 0.5;
         }
 
-        /* Progress Bar Animation */
+        /* Progress Bar */
         .progress-fill {
             width: 0;
             transition: width 1.8s ease-out;
@@ -130,7 +176,15 @@
             width: var(--progress-width);
         }
 
-        /* Timeline Dot Pulse */
+        /* Skill Proficiency */
+        .skill-progress {
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            margin-top: 4px;
+        }
+
+        /* Timeline Dot */
         .timeline-dot {
             animation: pulse 1.8s ease-in-out infinite;
         }
@@ -143,11 +197,26 @@
         /* Improved Text Readability */
         h1, h2, h3, p, li {
             color: var(--text);
-            text-shadow: 0 0 2px rgba(255, 255, 255, 0.5); /* Subtle shadow for contrast */
+            text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
         }
 
         .hero-title, .section-title {
-            color: #ffffff; /* White for high contrast on gradient background */
+            color: #ffffff;
+        }
+
+        body.dark .hero-title, body.dark .section-title {
+            color: var(--dark-text);
+        }
+
+        /* Expandable Project Card */
+        .project-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .project-details.active {
+            max-height: 200px;
         }
 
         /* Responsive */
@@ -192,17 +261,23 @@
     <!-- Particles Background -->
     <div class="particles" id="particles"></div>
 
+    <!-- Dark Mode Toggle -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-2 bg-white text-blue-600 rounded-full hover:bg-opacity-90 glow-effect" aria-label="Toggle dark mode">
+        🌙
+    </button>
+
     <!-- Header -->
-    <header class="sticky top-0 z-50 glass">
+    <header class="sticky top-0 z-40 glass">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-2xl font-extrabold text-gray-800">Luke James</div>
             <nav class="flex space-x-6">
-                <a href="#hero" class="text-gray-600 hover:text-blue-600 font-medium transition-all">Home</a>
-                <a href="#about" class="text-gray-600 hover:text-blue-600 font-medium transition-all">About</a>
-                <a href="#skills" class="text-gray-600 hover:text-blue-600 font-medium transition-all">Skills</a>
-                <a href="#experience" class="text-gray-600 hover:text-blue-600 font-medium transition-all">Experience</a>
-                <a href="#achievements" class="text-gray-600 hover:text-blue-600 font-medium transition-all">Achievements</a>
-                <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium transition-all">Contact</a>
+                <a href="#hero" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Home</a>
+                <a href="#about" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">About</a>
+                <a href="#skills" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Skills</a>
+                <a href="#projects" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Projects</a>
+                <a href="#experience" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Experience</a>
+                <a href="#achievements" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Achievements</a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Contact</a>
             </nav>
         </div>
     </header>
@@ -212,7 +287,10 @@
         <div class="container mx-auto px-6">
             <h1 class="hero-title text-6xl font-extrabold animate-fade-in mb-4">Luke James</h1>
             <p class="text-2xl mb-8 opacity-90 animate-fade-in" style="animation-delay: 0.2s;">Test Lead & QA Automation Engineer</p>
-            <a href="#contact" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-opacity-90 transition-all hover-scale glow-effect animate-fade-in" style="animation-delay: 0.4s;">Get in Touch</a>
+            <div class="flex justify-center gap-4">
+                <a href="#contact" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-opacity-90 transition-all hover-scale glow-effect animate-fade-in" style="animation-delay: 0.4s;">Get in Touch</a>
+                <a href="/Luke_James_CV.pdf" download class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all hover-scale glow-effect animate-fade-in" style="animation-delay: 0.5s;">Download CV</a>
+            </div>
         </div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30v4h-4v2h4v4h2v-4h4v-2h-4V4h-2zM6 34v4h4v-4h4v-2h-4v-4h-2v4H6v2zm0-30v2h4v4h2V6h4V4H6v2z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] animate-pulse opacity-20"></div>
     </section>
@@ -239,58 +317,91 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="glass p-6 rounded-lg hover-scale neon-border animate-fade-in" style="animation-delay: 0.2s;">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Automation</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>C#</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Selenium</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Ranorex</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>SpecFlow</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Cypress</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Playwright (TypeScript)</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Postman</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>API Testing</li>
+                    <ul class="space-y-3">
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>C#<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 90%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Selenium<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 85%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Ranorex<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 80%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>SpecFlow<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 85%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Cypress<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 75%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Playwright (TypeScript)<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 75%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Postman<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 80%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>API Testing<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 85%;"></div></div></li>
                     </ul>
                 </div>
                 <div class="glass p-6 rounded-lg hover-scale neon-border animate-fade-in" style="animation-delay: 0.3s;">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Cloud & Environments</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>AWS</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Azure</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Kubernetes Cluster Deployments</li>
+                    <ul class="space-y-3">
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>AWS<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 80%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Azure<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 80%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Kubernetes Cluster Deployments<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 75%;"></div></div></li>
                     </ul>
                 </div>
                 <div class="glass p-6 rounded-lg hover-scale neon-border animate-fade-in" style="animation-delay: 0.4s;">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Frameworks & Practices</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>TDD</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>BDD</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Page Object Model</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>CI/CD with Jenkins/Groovy</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>GitHub Actions</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Ansible</li>
+                    <ul class="space-y-3">
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>TDD<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 85%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>BDD<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 85%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Page Object Model<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 80%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>CI/CD with Jenkins/Groovy<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 90%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>GitHub Actions<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 85%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Ansible<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 80%;"></div></div></li>
                     </ul>
                 </div>
                 <div class="glass p-6 rounded-lg hover-scale neon-border animate-fade-in" style="animation-delay: 0.5s;">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Tools & Platforms</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Zephyr Scale</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>JIRA</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Git</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>SQL Server</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>MongoDB</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>IIS</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>PowerShell</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Active Directory</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Exchange</li>
+                    <ul class="space-y-3">
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Zephyr Scale<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 85%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>JIRA<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 90%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Git<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 85%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>SQL Server<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 80%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>MongoDB<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 75%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>IIS<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 75%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>PowerShell<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 80%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Active Directory<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 80%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Exchange<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 75%;"></div></div></li>
                     </ul>
                 </div>
                 <div class="glass p-6 rounded-lg hover-scale neon-border animate-fade-in" style="animation-delay: 0.6s;">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Leadership</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Test Strategy & Planning</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Stakeholder Management</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Team Mentoring & Training</li>
-                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Incident Management</li>
+                    <ul class="space-y-3">
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Test Strategy & Planning<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 90%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Stakeholder Management<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 85%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Team Mentoring & Training<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 90%;"></div></div></li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-2">•</span>Incident Management<div class="skill-progress ml-auto w-24"><div class="progress-fill bg-cyan-400 rounded-full" style="--progress-width: 85%;"></div></div></li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-4xl font-extrabold text-center mb-12 gradient-text animate-fade-in">Key Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass p-6 rounded-lg hover-scale neon-border animate-fade-in" style="animation-delay: 0.2s;">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Buy-to-Let Mortgages QA</h3>
+                    <p class="text-gray-600 mb-4">Nationwide Building Society</p>
+                    <button class="project-toggle text-blue-600 hover:underline text-sm" data-target="project1">Show Details</button>
+                    <div id="project1" class="project-details mt-4 text-sm text-gray-600">
+                        <p>Led QA for a buy-to-let mortgages scrum team, designing test strategies for a strategic software upgrade. Managed 6 engineers, implemented CI/CD pipelines with Jenkins, GitHub Actions, and Ansible, and trained testers in C# Selenium automation.</p>
+                    </div>
+                </div>
+                <div class="glass p-6 rounded-lg hover-scale neon-border animate-fade-in" style="animation-delay: 0.3s;">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">API Automation Suite</h3>
+                    <p class="text-gray-600 mb-4">Nationwide Building Society</p>
+                    <button class="project-toggle text-blue-600 hover:underline text-sm" data-target="project2">Show Details</button>
+                    <div id="project2" class="project-details mt-4 text-sm text-gray-600">
+                        <p>Built automation suites for multiple API projects using C#/.NET, SpecFlow, and RestSharp. Conducted testing in AWS with Kubernetes clusters and introduced Zephyr Scale for improved traceability.</p>
+                    </div>
+                </div>
+                <div class="glass p-6 rounded-lg hover-scale neon-border animate-fade-in" style="animation-delay: 0.4s;">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Automation Framework Development</h3>
+                    <p class="text-gray-600 mb-4">Cherwell Software</p>
+                    <button class="project-toggle text-blue-600 hover:underline text-sm" data-target="project3">Show Details</button>
+                    <div id="project3" class="project-details mt-4 text-sm text-gray-600">
+                        <p>Created 300+ automation tests in C# using Selenium and Ranorex, integrating them into Jenkins and TeamCity pipelines. Implemented TDD practices to reduce defect leakage, earning the Cherwell Values Award (2020).</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -464,6 +575,9 @@
                 <a href="https://www.linkedin.com/in/lukejames27/" target="_blank" class="flex items-center text-gray-800 hover:text-blue-600 transition-all glow-effect">
                     <span class="mr-2">🔗</span> LinkedIn
                 </a>
+                <a href="/Luke_James_CV.pdf" download class="flex items-center text-gray-800 hover:text-blue-600 transition-all glow-effect">
+                    <span class="mr-2">📄</span> Download CV
+                </a>
             </div>
         </div>
     </section>
@@ -510,7 +624,7 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('section, .experience-item, .achievement-item').forEach(el => {
+        document.querySelectorAll('section, .experience-item, .achievement-item, .project-details').forEach(el => {
             observer.observe(el);
         });
 
@@ -562,4 +676,28 @@
             }
         }
         setTimeout(type, 500);
+
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        // Load Theme Preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+            themeToggle.textContent = '☀️';
+        }
+
+        // Project Toggle
+        document.querySelectorAll('.project-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                const details = document.getElementById(targetId);
+                details.classList.toggle('active');
+                button.textContent = details.classList.contains('active') ? 'Hide Details' : 'Show Details';
+            });
+        });
     </script>
