@@ -3,2594 +3,461 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luke James - Quantum Test Architect | Next-Gen SDET</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <meta name="description" content="Elite Test Automation Leader & Future SDET - Revolutionizing QA with AI-powered testing frameworks">
+    <title>Luke James - Test Lead & QA Automation Engineer</title>
+    <meta name="description" content="Experienced Test Lead and Quality Assurance Engineer specializing in automation frameworks, CI/CD pipelines, and team leadership in Agile environments.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        
         :root {
-            --neon-cyan: #00ffff;
-            --neon-purple: #8b5cf6;
-            --neon-green: #00ff88;
-            --neon-pink: #ff006e;
-            --neon-yellow: #ffff00;
-            --neon-orange: #ff8c00;
-            --dark-bg: #0a0a0f;
-            --darker-bg: #050508;
-            --card-bg: rgba(15, 15, 25, 0.9);
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
-        }
-
-        /* Quantum Mode Styles */
-        .quantum-active {
-            animation: quantum-pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes quantum-pulse {
-            0%, 100% { 
-                transform: scale(1);
-                box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-            }
-            50% { 
-                transform: scale(1.05);
-                box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
-            }
-        }
-        
-        /* Enhanced Glow Effects */
-        .glow-text {
-            text-shadow: 
-                0 0 10px currentColor,
-                0 0 20px currentColor,
-                0 0 40px currentColor,
-                0 0 80px currentColor;
-        }
-        
-        /* Holographic Effect */
-        .holographic {
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-            background-size: 200% 200%;
-            animation: holographic-sweep 3s ease-in-out infinite;
-        }
-        
-        @keyframes holographic-sweep {
-            0% { background-position: -200% -200%; }
-            100% { background-position: 200% 200%; }
-        }
-        
-        /* Data Stream Effect */
-        .data-stream {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .data-stream::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(0, 255, 255, 0.4), 
-                transparent);
-            animation: data-flow 2s ease-in-out infinite;
-        }
-        
-        @keyframes data-flow {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --primary: #2563eb; /* Blue */
+            --secondary: #4b5563; /* Gray */
+            --accent: #10b981; /* Green */
+            --bg: #f9fafb;
+            --text: #1f2937;
+            --border: #e5e7eb;
+            --gradient: linear-gradient(45deg, #2563eb, #10b981);
         }
 
         body {
-            font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-            background: var(--dark-bg);
-            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
             overflow-x: hidden;
-            cursor: none;
-            scroll-behavior: smooth;
         }
 
-        /* Enhanced Custom Cursor with Trails */
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--neon-cyan);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            mix-blend-mode: difference;
+        /* Subtle Animations */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .cursor-trail {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            background: var(--neon-cyan);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0.7;
-            transition: all 0.3s ease;
+        .animate-slide-in {
+            animation: slideIn 0.5s ease-out forwards;
         }
 
-        /* Matrix Rain Background */
-        .matrix-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -3;
-            overflow: hidden;
-        }
-
-        .matrix-column {
-            position: absolute;
-            top: -100%;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            color: var(--neon-green);
-            white-space: nowrap;
-            animation: matrix-fall linear infinite;
-            text-shadow: 0 0 10px var(--neon-green);
-        }
-
-        @keyframes matrix-fall {
-            to { top: 100%; }
-        }
-
-        /* Advanced Neural Background */
-        .neural-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 0, 110, 0.08) 0%, transparent 50%),
-                linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 50%, var(--dark-bg) 100%);
-        }
-
-        /* Floating Code Snippets */
-        .floating-code {
-            position: fixed;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: rgba(0, 255, 255, 0.3);
-            pointer-events: none;
-            z-index: -1;
-            white-space: nowrap;
-            animation: float-code 15s linear infinite;
-        }
-
-        @keyframes float-code {
-            0% { 
-                transform: translateX(-100px) translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { 
-                transform: translateX(100vw) translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Enhanced Navigation with Sound */
-        .nav-container {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-        }
-
-        .nav-morph {
-            background: var(--glass);
-            backdrop-filter: blur(30px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 
-                0 8px 32px rgba(0, 255, 255, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-morph:hover {
-            transform: scale(1.02);
-            box-shadow: 
-                0 15px 60px rgba(0, 255, 255, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        .logo-morph {
-            font-weight: 700;
-            font-size: 1.3rem;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple), var(--neon-green));
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 3s ease infinite;
-            position: relative;
-            cursor: pointer;
-        }
-
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .nav-items {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-        }
-
-        .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .nav-link:hover::before {
-            left: 100%;
-        }
-
-        .nav-link:hover {
-            color: var(--neon-cyan);
-            background: rgba(0, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Theme Switcher */
-        .theme-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1001;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 10px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .theme-btn {
-            width: 40px;
-            height: 40px;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .theme-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px currentColor;
-        }
-
-        /* Hero Section with WebGL-like Effects */
-        .hero-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            perspective: 2000px;
-            overflow: hidden;
-        }
-
-        .hero-hologram {
-            text-align: center;
-            transform-style: preserve-3d;
-            animation: float-complex 8s ease-in-out infinite;
-            position: relative;
-        }
-
-        @keyframes float-complex {
-            0%, 100% { 
-                transform: translateY(0px) rotateX(0deg) rotateZ(0deg); 
-            }
-            25% { 
-                transform: translateY(-15px) rotateX(3deg) rotateZ(1deg); 
-            }
-            50% { 
-                transform: translateY(-25px) rotateX(0deg) rotateZ(0deg); 
-            }
-            75% { 
-                transform: translateY(-10px) rotateX(-2deg) rotateZ(-1deg); 
-            }
-        }
-
-        .hero-title {
-            font-size: clamp(3rem, 12vw, 9rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple), var(--neon-green), var(--neon-pink));
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: 
-                gradient-flow 4s ease infinite,
-                text-glow 3s ease-in-out infinite alternate,
-                text-shake 0.1s ease-in-out infinite;
-            text-shadow: 0 0 60px rgba(0, 255, 255, 0.8);
-            position: relative;
-            font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: -2px;
-        }
-
-        @keyframes gradient-flow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes text-glow {
-            from { 
-                filter: 
-                    drop-shadow(0 0 20px rgba(0, 255, 255, 0.5))
-                    drop-shadow(0 0 40px rgba(139, 92, 246, 0.3)); 
-            }
-            to { 
-                filter: 
-                    drop-shadow(0 0 40px rgba(139, 92, 246, 0.8))
-                    drop-shadow(0 0 80px rgba(0, 255, 255, 0.4)); 
-            }
-        }
-
-        @keyframes text-shake {
-            0% { transform: translate(0); }
-            25% { transform: translate(0.5px, -0.5px); }
-            50% { transform: translate(-0.5px, 0.5px); }
-            75% { transform: translate(0.5px, 0.5px); }
-            100% { transform: translate(0); }
-        }
-
-        /* Holographic Subtitle with Advanced Glitch */
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 4vw, 2.5rem);
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            position: relative;
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 600;
-        }
-
-        .glitch-advanced {
-            position: relative;
-            display: inline-block;
-            font-weight: 600;
-        }
-
-        .glitch-advanced::before,
-        .glitch-advanced::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0.8;
-        }
-
-        .glitch-advanced::before {
-            color: var(--neon-pink);
-            animation: glitch-1 0.5s infinite linear alternate-reverse;
-            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-        }
-
-        .glitch-advanced::after {
-            color: var(--neon-green);
-            animation: glitch-2 0.5s infinite linear alternate-reverse;
-            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-        }
-
-        @keyframes glitch-1 {
-            0% { transform: translate(0); }
-            2% { transform: translate(2px, 0); }
-            4% { transform: translate(-2px, 0); }
-            6% { transform: translate(0); }
-            8% { transform: translate(2px, 0); }
-            10% { transform: translate(-2px, 0); }
-            12% { transform: translate(0); }
-            100% { transform: translate(0); }
-        }
-
-        @keyframes glitch-2 {
-            0% { transform: translate(0); }
-            2% { transform: translate(-2px, 0); }
-            4% { transform: translate(2px, 0); }
-            6% { transform: translate(0); }
-            8% { transform: translate(-2px, 0); }
-            10% { transform: translate(2px, 0); }
-            12% { transform: translate(0); }
-            100% { transform: translate(0); }
-        }
-
-        /* Enhanced Terminal with Live Coding */
-        .terminal-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            position: relative;
-        }
-
-        .terminal {
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid var(--neon-green);
-            border-radius: 15px;
-            padding: 1.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            box-shadow: 
-                0 0 50px rgba(0, 255, 136, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .terminal::before {
-            content: '● ● ●';
-            position: absolute;
-            top: 15px;
-            left: 20px;
-            color: var(--neon-green);
-            font-size: 14px;
-            text-shadow: 0 0 10px currentColor;
-        }
-
-        .terminal-header {
-            background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 1rem;
-            padding-top: 20px;
-        }
-
-        .terminal-content {
-            color: var(--neon-green);
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        .terminal-line {
-            margin: 8px 0;
-            opacity: 0;
-            animation: terminal-appear 0.5s ease forwards;
-        }
-
-        @keyframes terminal-appear {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .terminal-prompt::before {
-            content: '$ ';
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px currentColor;
-        }
-
-        .terminal-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: var(--neon-green);
-            margin-left: 2px;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* Live Code Editor */
-        .code-editor {
-            background: rgba(0, 0, 0, 0.95);
-            border: 1px solid var(--neon-purple);
-            border-radius: 10px;
-            margin: 2rem 0;
-            overflow: hidden;
-            box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
-        }
-
-        .code-header {
-            background: linear-gradient(90deg, rgba(139, 92, 246, 0.2), rgba(0, 255, 255, 0.1));
-            padding: 12px 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: var(--neon-purple);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .code-content {
-            padding: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            line-height: 1.6;
-            color: #e2e8f0;
-            overflow-x: auto;
-        }
-
-        .code-line {
-            margin: 4px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .code-line::before {
-            content: counter(line-counter);
-            counter-increment: line-counter;
-            position: absolute;
-            left: 0;
-            color: rgba(255, 255, 255, 0.3);
-            width: 15px;
-            text-align: right;
-        }
-
-        .code-content {
-            counter-reset: line-counter;
-        }
-
-        .syntax-keyword { color: var(--neon-purple); font-weight: 600; }
-        .syntax-string { color: var(--neon-green); }
-        .syntax-comment { color: rgba(255, 255, 255, 0.4); font-style: italic; }
-        .syntax-function { color: var(--neon-cyan); }
-        .syntax-variable { color: var(--neon-yellow); }
-
-        /* Interactive Skills Grid with 3D Transform */
-        .skills-section {
-            padding: 8rem 2rem;
-            position: relative;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 8vw, 5rem);
-            font-weight: 700;
-            margin-bottom: 4rem;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 3s ease infinite;
-            position: relative;
-            text-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 4px;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
-            border-radius: 2px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            perspective: 1200px;
-        }
-
-        .skill-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(30px);
-            border: 2px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 2.5rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            transform-style: preserve-3d;
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(0, 255, 255, 0.1), 
-                rgba(139, 92, 246, 0.1), 
-                rgba(0, 255, 136, 0.1));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .skill-card::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, 
-                var(--neon-cyan), 
-                var(--neon-purple), 
-                var(--neon-green), 
-                var(--neon-pink));
-            background-size: 400% 400%;
-            border-radius: 25px;
-            opacity: 0;
-            animation: gradient-border 4s ease infinite;
-            z-index: -1;
-        }
-
-        .skill-card:hover::before {
-            opacity: 1;
-        }
-
-        .skill-card:hover::after {
-            opacity: 1;
-        }
-
-        @keyframes gradient-border {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .skill-card:hover {
-            transform: 
-                translateY(-15px) 
-                rotateX(10deg) 
-                rotateY(10deg) 
-                scale(1.02);
-            border-color: var(--neon-cyan);
-            box-shadow: 
-                0 25px 80px rgba(0, 255, 255, 0.4),
-                0 0 50px rgba(139, 92, 246, 0.3);
-        }
-
-        .skill-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            display: block;
-            filter: drop-shadow(0 0 20px currentColor);
-            animation: icon-pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes icon-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .skill-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .skill-description {
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-
-        /* Advanced Progress Bars with Animation */
-        .progress-container {
-            margin: 1.5rem 0;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .progress-bar {
-            height: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
+        /* Glassmorphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
+        /* Hover Effects */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Progress Bar Animation */
         .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, 
-                var(--neon-cyan), 
-                var(--neon-purple), 
-                var(--neon-green));
-            border-radius: 6px;
             width: 0;
-            transition: width 2.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+            transition: width 1.5s ease-out;
         }
 
-        .progress-fill::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.6), 
-                transparent);
-            animation: shimmer 3s infinite;
+        .progress-fill.active {
+            width: var(--progress-width);
         }
 
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 6px;
-            height: 6px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px white;
-            animation: pulse-dot 2s ease-in-out infinite;
+        /* Timeline Dot Animation */
+        .timeline-dot {
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
-        }
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .experience-timeline::before {
+                left: 1rem;
+            }
 
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-        }
+            .experience-item,
+            .experience-item:nth-child(even) {
+                flex-direction: column;
+            }
 
-        .tech-tag {
-            background: linear-gradient(135deg, 
-                var(--neon-cyan), 
-                var(--neon-purple));
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
+            .experience-content,
+            .experience-item:nth-child(even) .experience-content {
+                width: 100%;
+                text-align: left;
+            }
 
-        .tech-tag::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.3), 
-                transparent);
-            transition: left 0.5s ease;
-        }
+            .timeline-dot {
+                left: 1rem;
+            }
 
-        .tech-tag:hover::before {
-            left: 100%;
-        }
+            .experience-item:nth-child(even) .experience-desc li {
+                padding-left: 1.5rem;
+                padding-right: 0;
+            }
 
-        .tech-tag:hover {
-            transform: scale(1.15) translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
-        }
+            .experience-item:nth-child(even) .experience-desc li::before {
+                left: 0;
+                right: auto;
+            }
 
-        /* Interactive Project Showcase */
-        .projects-section {
-            padding: 8rem 2rem;
-            position: relative;
-            background: linear-gradient(135deg, 
-                rgba(0, 0, 0, 0.1), 
-                rgba(139, 92, 246, 0.05));
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border: 2px solid var(--glass-border);
-            border-radius: 25px;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            transform: 
-                translateY(-25px) 
-                rotateX(15deg) 
-                rotateY(10deg) 
-                scale(1.03);
-            border-color: var(--neon-purple);
-            box-shadow: 
-                0 40px 100px rgba(139, 92, 246, 0.5),
-                0 0 60px rgba(0, 255, 255, 0.3);
-        }
-
-        .project-visual {
-            height: 280px;
-            background: linear-gradient(135deg, 
-                var(--neon-cyan), 
-                var(--neon-purple), 
-                var(--neon-green));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-visual::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="circuit" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 10 0 L 10 10 M 0 10 L 20 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23circuit)"/></svg>');
-            opacity: 0.4;
-            animation: circuit-flow 8s linear infinite;
-        }
-
-        @keyframes circuit-flow {
-            0% { transform: translateX(0) translateY(0); }
-            100% { transform: translateX(-20px) translateY(-20px); }
-        }
-
-        .project-stats {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            gap: 15px;
-        }
-
-        .stat-badge {
-            background: rgba(0, 0, 0, 0.8);
-            color: var(--neon-green);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            border: 1px solid var(--neon-green);
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
-        }
-
-        .project-content {
-            padding: 2.5rem;
-        }
-
-        .project-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--neon-purple);
-            text-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .project-description {
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-
-        .project-metrics {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .metric {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(0, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 15px;
-        }
-
-        .metric-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px currentColor;
-        }
-
-        .metric-label {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.7);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            color: var(--neon-green);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.4s ease;
-            text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
-            font-size: 1.1rem;
-        }
-
-        .project-link:hover {
-            gap: 1.5rem;
-            color: white;
-            text-shadow: 0 0 25px rgba(0, 255, 136, 1);
-            transform: translateX(10px);
-        }
-
-        .project-link::after {
-            content: '→';
-            transition: transform 0.3s ease;
-        }
-
-        .project-link:hover::after {
-            transform: translateX(5px);
-        }
-
-        /* Achievement Badges */
-        .achievements-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, 
-                rgba(139, 92, 246, 0.1), 
-                rgba(0, 255, 255, 0.05));
-        }
-
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .achievement-badge {
-            background: var(--card-bg);
-            border: 2px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-
-        .achievement-badge:hover {
-            transform: translateY(-10px) scale(1.05);
-            border-color: var(--neon-yellow);
-            box-shadow: 0 20px 40px rgba(255, 255, 0, 0.3);
-        }
-
-        .achievement-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 0 15px currentColor);
-        }
-
-        .achievement-title {
-            font-weight: 600;
-            color: var(--neon-yellow);
-            margin-bottom: 0.5rem;
-        }
-
-        .achievement-desc {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Interactive Contact Section */
-        .contact-section {
-            padding: 8rem 2rem;
-            background: linear-gradient(135deg, 
-                rgba(0, 255, 255, 0.08), 
-                rgba(139, 92, 246, 0.08), 
-                rgba(0, 255, 136, 0.05));
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(0,255,255,0.1)"/><circle cx="20" cy="20" r="1" fill="rgba(139,92,246,0.1)"/><circle cx="80" cy="80" r="1.5" fill="rgba(0,255,136,0.1)"/></svg>');
-            animation: float-bg 15s ease-in-out infinite;
-        }
-
-        @keyframes float-bg {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-10px, -10px) scale(1.1); }
-            66% { transform: translate(10px, 10px) scale(0.9); }
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            max-width: 1000px;
-            margin: 4rem auto 0;
-        }
-
-        .contact-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(30px);
-            border: 2px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-decoration: none;
-            color: white;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            background: linear-gradient(45deg, 
-                var(--neon-cyan), 
-                var(--neon-purple), 
-                var(--neon-green), 
-                var(--neon-pink),
-                var(--neon-yellow));
-            background-size: 400% 400%;
-            border-radius: 20px;
-            opacity: 0;
-            animation: gradient-border 4s ease infinite;
-            z-index: -1;
-            transition: opacity 0.4s ease;
-        }
-
-        .contact-card:hover::before {
-            opacity: 1;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-15px) scale(1.05) rotateZ(2deg);
-            box-shadow: 0 25px 60px rgba(0, 255, 255, 0.4);
-        }
-
-        .contact-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
-            filter: drop-shadow(0 0 20px currentColor);
-            animation: icon-bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes icon-bounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-8px) scale(1.1); }
-        }
-
-        .contact-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 15px currentColor;
-        }
-
-        .contact-info {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        /* Audio Visualizer */
-        .audio-visualizer {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 200px;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--neon-cyan);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 10px;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-        }
-
-        .visualizer-bar {
-            width: 4px;
-            background: var(--neon-cyan);
-            border-radius: 2px;
-            transition: height 0.2s ease;
-            animation: audio-wave 1s ease-in-out infinite;
-            box-shadow: 0 0 8px currentColor;
-        }
-
-        .visualizer-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
-        .visualizer-bar:nth-child(2) { height: 35px; animation-delay: 0.1s; }
-        .visualizer-bar:nth-child(3) { height: 28px; animation-delay: 0.2s; }
-        .visualizer-bar:nth-child(4) { height: 40px; animation-delay: 0.3s; }
-        .visualizer-bar:nth-child(5) { height: 25px; animation-delay: 0.4s; }
-        .visualizer-bar:nth-child(6) { height: 32px; animation-delay: 0.5s; }
-        .visualizer-bar:nth-child(7) { height: 38px; animation-delay: 0.6s; }
-        .visualizer-bar:nth-child(8) { height: 22px; animation-delay: 0.7s; }
-
-        @keyframes audio-wave {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(1.5); }
-        }
-
-        /* Scroll Progress Indicator */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(0, 255, 255, 0.2);
-            z-index: 9999;
-        }
-
-        .progress-fill-scroll {
-            height: 100%;
-            background: linear-gradient(90deg, 
-                var(--neon-cyan), 
-                var(--neon-purple), 
-                var(--neon-green));
-            width: 0%;
-            transition: width 0.1s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-        }
-
-        /* Performance Metrics Display */
-        .perf-metrics {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            border: 1px solid var(--neon-green);
-            border-radius: 10px;
-            padding: 15px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--neon-green);
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-            opacity: 0.7;
-        }
-
-        .perf-item {
-            margin: 5px 0;
-            display: flex;
-            justify-content: space-between;
+            .contact-info {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Scroll Progress -->
-    <div class="scroll-progress">
-        <div class="progress-fill-scroll" id="scroll-progress"></div>
-    </div>
-
-    <!-- Custom Cursors -->
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-trail" id="cursor-trail-1"></div>
-    <div class="cursor-trail" id="cursor-trail-2"></div>
-    <div class="cursor-trail" id="cursor-trail-3"></div>
-
-    <!-- Matrix Rain Background -->
-    <div class="matrix-rain" id="matrix-rain"></div>
-
-    <!-- Neural Background -->
-    <div class="neural-bg"></div>
-
-    <!-- Floating Code Snippets -->
-    <div id="floating-code-container"></div>
-
-    <!-- Particle System -->
-    <div class="particle-system" id="particle-system"></div>
-
-    <!-- Theme Switcher -->
-    <div class="theme-switcher">
-        <button class="theme-btn" id="theme-cyber" style="background: linear-gradient(45deg, #00ffff, #8b5cf6);">🔮</button>
-        <button class="theme-btn" id="theme-matrix" style="background: linear-gradient(45deg, #00ff88, #ffff00);">💊</button>
-        <button class="theme-btn" id="theme-neon" style="background: linear-gradient(45deg, #ff006e, #ff8c00);">⚡</button>
-    </div>
-
-    <!-- Performance Metrics -->
-    <div class="perf-metrics" id="perf-metrics">
-        <div class="perf-item">
-            <span>FPS:</span>
-            <span class="perf-value" id="fps-counter">60</span>
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold gradient-text">Luke James</div>
+            <nav class="flex space-x-6">
+                <a href="#hero" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">About</a>
+                <a href="#skills" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Skills</a>
+                <a href="#experience" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Experience</a>
+                <a href="#achievements" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Achievements</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Contact</a>
+            </nav>
         </div>
-        <div class="perf-item">
-            <span>Load Time:</span>
-            <span class="perf-value" id="load-time">0.0s</span>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="py-20 bg-gradient-to-r from-blue-600 to-green-500 text-white text-center">
+        <div class="container mx-auto px-6">
+            <h1 class="text-5xl font-bold mb-4 gradient-text animate-slide-in">Luke James</h1>
+            <p class="text-2xl mb-6 opacity-90 animate-slide-in" style="animation-delay: 0.2s;">Test Lead & Quality Assurance Engineer</p>
+            <a href="#contact" class="inline-block bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors hover-lift animate-slide-in" style="animation-delay: 0.4s;">Get in Touch</a>
         </div>
-        <div class="perf-item">
-            <span>Memory:</span>
-            <span class="perf-value" id="memory-usage">0MB</span>
-        </div>
-    </div>
+    </section>
 
-    <!-- Audio Visualizer -->
-    <div class="audio-visualizer" id="audio-viz">
-        <div class="visualizer-bar"></div>
-        <div class="visualizer-bar"></div>
-        <div class="visualizer-bar"></div>
-        <div class="visualizer-bar"></div>
-        <div class="visualizer-bar"></div>
-        <div class="visualizer-bar"></div>
-        <div class="visualizer-bar"></div>
-        <div class="visualizer-bar"></div>
-    </div>
-
-    <!-- Navigation -->
-    <div class="nav-container">
-        <nav class="nav-morph">
-            <div class="logo-morph" id="logo-sound">LUKE.DEV</div>
-            <ul class="nav-items">
-                <li><a href="#home" class="nav-link">HOME</a></li>
-                <li><a href="#skills" class="nav-link">SKILLS</a></li>
-                <li><a href="#projects" class="nav-link">PROJECTS</a></li>
-                <li><a href="#achievements" class="nav-link">ACHIEVEMENTS</a></li>
-                <li><a href="#contact" class="nav-link">CONTACT</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero-section">
-            <div class="hero-hologram">
-                <h1 class="hero-title">LUKE JAMES</h1>
-                <p class="hero-subtitle">
-                    <span class="glitch-advanced" data-text="TEST LEAD & QA AUTOMATION EXPERT">TEST LEAD & QA AUTOMATION EXPERT</span>
-                </p>
-                
-                <div class="terminal-container">
-                    <div class="terminal">
-                        <div class="terminal-header">quantum_profile.exe</div>
-                        <div class="terminal-content" id="terminal-content">
-                            <div class="terminal-line terminal-prompt">system_stats --show-profile</div>
-                            <div class="terminal-line">▶ Experience: <span style="color: var(--neon-green);">13 YEARS IN IT/QA</span></div>
-                            <div class="terminal-line">▶ Current Role: <span style="color: var(--neon-cyan);">TEST LEAD @ NATIONWIDE</span></div>
-                            <div class="terminal-line">▶ Automation Tests Built: <span style="color: var(--neon-purple);">300+ AND COUNTING</span></div>
-                            <div class="terminal-line">▶ Team Leadership: <span style="color: var(--neon-green);">MANAGING 6 ENGINEERS</span></div>
-                            <div class="terminal-line terminal-prompt">ready_to_elevate_quality<span class="terminal-cursor"></span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="code-editor">
-                    <div class="code-header">
-                        <span>NationwideAutomationFramework.cs</span>
-                        <span style="color: var(--neon-green);">● PRODUCTION READY</span>
-                    </div>
-                    <div class="code-content">
-                        <div class="code-line"><span class="syntax-keyword">using</span> Selenium.WebDriver;</div>
-                        <div class="code-line"><span class="syntax-keyword">using</span> SpecFlow;</div>
-                        <div class="code-line"><span class="syntax-keyword">using</span> RestSharp;</div>
-                        <div class="code-line">    </div>
-                        <div class="code-line"><span class="syntax-comment">// Real framework powering Nationwide's testing</span></div>
-                        <div class="code-line"><span class="syntax-keyword">public class</span> <span class="syntax-function">TestAutomationSuite</span> {</div>
-                        <div class="code-line">    <span class="syntax-keyword">private</span> <span class="syntax-variable">IWebDriver</span> driver;</div>
-                        <div class="code-line">    <span class="syntax-keyword">private</span> <span class="syntax-variable">RestClient</span> apiClient;</div>
-                        <div class="code-line">    </div>
-                        <div class="code-line">    [<span style="color: var(--neon-purple);">Given</span>(<span class="syntax-string">"I am testing the mortgage application"</span>)]</div>
-                        <div class="code-line">    <span class="syntax-keyword">public void</span> <span class="syntax-function">ExecuteTest</span>() {</div>
-                        <div class="code-line">        driver.<span class="syntax-function">FindElement</span>(By.Id(<span class="syntax-string">"submit"</span>)).<span class="syntax-function">Click</span>();</div>
-                        <div class="code-line">        <span class="syntax-function">Assert</span>.IsTrue(result);</div>
-                        <div class="code-line">    }</div>
-                        <div class="code-line">}</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="skills-section">
-            <h2 class="section-title">TECHNICAL ARSENAL</h2>
-            <div class="skills-grid">
-                <div class="skill-card" data-skill="automation">
-                    <span class="skill-icon">🚀</span>
-                    <h3 class="skill-title">TEST AUTOMATION MASTERY</h3>
-                    <p class="skill-description">
-                        13 years building enterprise automation frameworks from scratch. Built 300+ automated tests using C#, Selenium, Ranorex, SpecFlow. Expert in Cypress and Playwright with TypeScript for modern web testing.
-                    </p>
-                    <div class="progress-container">
-                        <div class="progress-label">
-                            <span>Automation Expertise</span>
-                            <span>98%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="98"></div>
-                        </div>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">C# / .NET</span>
-                        <span class="tech-tag">Selenium WebDriver</span>
-                        <span class="tech-tag">SpecFlow (BDD)</span>
-                        <span class="tech-tag">Cypress</span>
-                        <span class="tech-tag">Playwright</span>
-                        <span class="tech-tag">Ranorex</span>
-                    </div>
-                </div>
-
-                <div class="skill-card" data-skill="leadership">
-                    <span class="skill-icon">👨‍💼</span>
-                    <h3 class="skill-title">TEST LEADERSHIP</h3>
-                    <p class="skill-description">
-                        Currently leading QA for Nationwide's buy-to-let mortgages team. Manage 6 engineers, run daily stand-ups, triage meetings, and sprint planning. Trained manual testers in C# Selenium automation from ground up.
-                    </p>
-                    <div class="progress-container">
-                        <div class="progress-label">
-                            <span>Leadership Experience</span>
-                            <span>96%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="96"></div>
-                        </div>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Team Management</span>
-                        <span class="tech-tag">Agile/Scrum</span>
-                        <span class="tech-tag">Stakeholder Management</span>
-                        <span class="tech-tag">Mentoring</span>
-                        <span class="tech-tag">Test Strategy</span>
-                    </div>
-                </div>
-
-                <div class="skill-card" data-skill="api-testing">
-                    <span class="skill-icon">⚡</span>
-                    <h3 class="skill-title">API & INTEGRATION TESTING</h3>
-                    <p class="skill-description">
-                        Built multiple API automation suites using C#/.NET, SpecFlow, and RestSharp. Extensive experience with Postman for API testing. Tested in AWS environments with Kubernetes cluster deployments.
-                    </p>
-                    <div class="progress-container">
-                        <div class="progress-label">
-                            <span>API Testing Proficiency</span>
-                            <span>94%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="94"></div>
-                        </div>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">RestSharp</span>
-                        <span class="tech-tag">Postman</span>
-                        <span class="tech-tag">API Testing</span>
-                        <span class="tech-tag">REST APIs</span>
-                        <span class="tech-tag">Kubernetes</span>
-                    </div>
-                </div>
-
-                <div class="skill-card" data-skill="cicd">
-                    <span class="skill-icon">🔄</span>
-                    <h3 class="skill-title">CI/CD PIPELINE EXPERT</h3>
-                    <p class="skill-description">
-                        Implemented CI/CD pipelines using Jenkins/Groovy, GitHub Actions, and Ansible. Documented full processes and trained teams to use independently. Integrated automated testing into Jenkins and TeamCity pipelines.
-                    </p>
-                    <div class="progress-container">
-                        <div class="progress-label">
-                            <span>DevOps Integration</span>
-                            <span>92%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="92"></div>
-                        </div>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Jenkins</span>
-                        <span class="tech-tag">GitHub Actions</span>
-                        <span class="tech-tag">Ansible</span>
-                        <span class="tech-tag">TeamCity</span>
-                        <span class="tech-tag">Groovy</span>
-                    </div>
-                </div>
-
-                <div class="skill-card" data-skill="cloud">
-                    <span class="skill-icon">☁️</span>
-                    <h3 class="skill-title">CLOUD PLATFORMS</h3>
-                    <p class="skill-description">
-                        Worked extensively in AWS and Azure environments. Experience with Kubernetes cluster deployments for API testing. Skilled in cloud-based testing infrastructure and deployment strategies.
-                    </p>
-                    <div class="progress-container">
-                        <div class="progress-label">
-                            <span>Cloud Expertise</span>
-                            <span>89%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="89"></div>
-                        </div>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">AWS</span>
-                        <span class="tech-tag">Azure</span>
-                        <span class="tech-tag">Kubernetes</span>
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">Cloud Testing</span>
-                    </div>
-                </div>
-
-                <div class="skill-card" data-skill="frameworks">
-                    <span class="skill-icon">🏗️</span>
-                    <h3 class="skill-title">FRAMEWORKS & BEST PRACTICES</h3>
-                    <p class="skill-description">
-                        Expert in TDD, BDD, and Page Object Model design patterns. Implemented test management with Zephyr Scale and JIRA. Strong SQL skills with SQL Server and MongoDB. PowerShell automation expert.
-                    </p>
-                    <div class="progress-container">
-                        <div class="progress-label">
-                            <span>Framework Design</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="95"></div>
-                        </div>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">TDD/BDD</span>
-                        <span class="tech-tag">Page Object Model</span>
-                        <span class="tech-tag">Zephyr Scale</span>
-                        <span class="tech-tag">SQL Server</span>
-                        <span class="tech-tag">PowerShell</span>
-                        <span class="tech-tag">Git</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="projects-section">
-            <h2 class="section-title">CAREER HIGHLIGHTS</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-visual">
-                        <div class="project-stats">
-                            <div class="stat-badge">CURRENT ROLE</div>
-                            <div class="stat-badge">2023-PRESENT</div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">TEST LEAD @ NATIONWIDE</h3>
-                        <p class="project-description">
-                            Leading QA for buy-to-let mortgages scrum team at one of the UK's largest building societies. Managing 6 engineers, designing test strategies for strategic programmes, and implementing CI/CD pipelines with Jenkins and GitHub Actions.
-                        </p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <div class="metric-value">6</div>
-                                <div class="metric-label">Engineers Led</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">100%</div>
-                                <div class="metric-label">CI/CD Coverage</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">High</div>
-                                <div class="metric-label">Stakeholder Impact</div>
-                            </div>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">C# Selenium</span>
-                            <span class="tech-tag">SpecFlow BDD</span>
-                            <span class="tech-tag">Jenkins</span>
-                            <span class="tech-tag">GitHub Actions</span>
-                            <span class="tech-tag">Ansible</span>
-                        </div>
-                        <a href="https://www.linkedin.com/in/lukejames27/" class="project-link">
-                            VIEW LINKEDIN PROFILE
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-visual">
-                        <div class="project-stats">
-                            <div class="stat-badge">API TESTING</div>
-                            <div class="stat-badge">AWS/K8S</div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">API AUTOMATION ARCHITECT</h3>
-                        <p class="project-description">
-                            Built multiple API automation suites from scratch using C#/.NET, SpecFlow, and RestSharp at Nationwide. Conducted testing in AWS environments with Kubernetes clusters. Introduced Zephyr Scale for improved test traceability.
-                        </p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <div class="metric-value">Multiple</div>
-                                <div class="metric-label">API Suites Built</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">AWS</div>
-                                <div class="metric-label">Cloud Testing</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">K8s</div>
-                                <div class="metric-label">Container Testing</div>
-                            </div>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">C# / .NET</span>
-                            <span class="tech-tag">RestSharp</span>
-                            <span class="tech-tag">Kubernetes</span>
-                            <span class="tech-tag">AWS</span>
-                            <span class="tech-tag">Zephyr Scale</span>
-                        </div>
-                        <a href="#contact" class="project-link">
-                            DISCUSS THIS PROJECT
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-visual">
-                        <div class="project-stats">
-                            <div class="stat-badge">300+ TESTS</div>
-                            <div class="stat-badge">AWARD WINNER</div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">CHERWELL AUTOMATION FRAMEWORK</h3>
-                        <p class="project-description">
-                            Created 300+ automation tests using C#, Selenium, and Ranorex at Cherwell Software. Implemented TDD practices reducing defect leakage. Integrated automated testing into Jenkins and TeamCity CI/CD pipelines. Awarded Cherwell Values Award 2020.
-                        </p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <div class="metric-value">300+</div>
-                                <div class="metric-label">Automated Tests</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">↓</div>
-                                <div class="metric-label">Defect Reduction</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">🏆</div>
-                                <div class="metric-label">Values Award</div>
-                            </div>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">C# Selenium</span>
-                            <span class="tech-tag">Ranorex</span>
-                            <span class="tech-tag">TDD</span>
-                            <span class="tech-tag">Jenkins</span>
-                            <span class="tech-tag">TeamCity</span>
-                        </div>
-                        <a href="#contact" class="project-link">
-                            LEARN MORE
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-visual">
-                        <div class="project-stats">
-                            <div class="stat-badge">ENTERPRISE</div>
-                            <div class="stat-badge">GLOBAL HERO</div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">TIER 3 TECHNICAL LEADERSHIP</h3>
-                        <p class="project-description">
-                            Led escalations for enterprise clients at Cherwell Software. Served as key contact for major customers, produced root cause analysis for P1 incidents. Awarded 'Global Hero' recognition for exceptional client support and technical expertise.
-                        </p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <div class="metric-value">P1</div>
-                                <div class="metric-label">Incident Management</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">Enterprise</div>
-                                <div class="metric-label">Client Support</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">🌟</div>
-                                <div class="metric-label">Global Hero</div>
-                            </div>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Technical Support</span>
-                            <span class="tech-tag">RCA Analysis</span>
-                            <span class="tech-tag">Incident Management</span>
-                            <span class="tech-tag">Mentoring</span>
-                        </div>
-                        <a href="#achievements" class="project-link">
-                            VIEW ALL AWARDS
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Achievements Section -->
-        <section id="achievements" class="achievements-section">
-            <h2 class="section-title">AWARDS & RECOGNITION</h2>
-            <div class="achievements-grid">
-                <div class="achievement-badge">
-                    <div class="achievement-icon">🏆</div>
-                    <h3 class="achievement-title">Test Lead Promotion</h3>
-                    <p class="achievement-desc">Nationwide Building Society - 2023</p>
-                </div>
-                <div class="achievement-badge">
-                    <div class="achievement-icon">⚡</div>
-                    <h3 class="achievement-title">Values Award</h3>
-                    <p class="achievement-desc">Cherwell Software - 2020</p>
-                </div>
-                <div class="achievement-badge">
-                    <div class="achievement-icon">🌟</div>
-                    <h3 class="achievement-title">Global Hero Award</h3>
-                    <p class="achievement-desc">Cherwell Software - 2015</p>
-                </div>
-                <div class="achievement-badge">
-                    <div class="achievement-icon">🎯</div>
-                    <h3 class="achievement-title">Quality Monitoring Award</h3>
-                    <p class="achievement-desc">UK Shared Business Services - 2012</p>
-                </div>
-                <div class="achievement-badge">
-                    <div class="achievement-icon">📚</div>
-                    <h3 class="achievement-title">ITIL v3 Foundation</h3>
-                    <p class="achievement-desc">Certified IT Service Management</p>
-                </div>
-                <div class="achievement-badge">
-                    <div class="achievement-icon">🔧</div>
-                    <h3 class="achievement-title">Cherwell Certified</h3>
-                    <p class="achievement-desc">Professional Designer & Administrator</p>
-                </div>
-                <div class="achievement-badge">
-                    <div class="achievement-icon">👨‍🏫</div>
-                    <h3 class="achievement-title">Team Trainer</h3>
-                    <p class="achievement-desc">Trained Manual Testers in C# Automation</p>
-                </div>
-                <div class="achievement-badge">
-                    <div class="achievement-icon">📊</div>
-                    <h3 class="achievement-title">300+ Tests Created</h3>
-                    <p class="achievement-desc">Enterprise-Grade Automation Suites</p>
-                </div>
-                <div class="achievement-badge">
-                    <div class="achievement-icon">🚀</div>
-                    <h3 class="achievement-title">CI/CD Pioneer</h3>
-                    <p class="achievement-desc">Implemented Jenkins & GitHub Actions</p>
-                </div>
-                <div class="achievement-badge">
-                    <div class="achievement-icon">⚽</div>
-                    <h3 class="achievement-title">Swindon Town FC</h3>
-                    <p class="achievement-desc">Season Ticket Holder - Die-Hard Fan</p>
-                </div>
-                <div class="achievement-badge">
-                    <div class="achievement-icon">🎓</div>
-                    <h3 class="achievement-title">13 Years Experience</h3>
-                    <p class="achievement-desc">IT, Support & Quality Assurance</p>
-                </div>
-                <div class="achievement-badge">
-                    <div class="achievement-icon">🌍</div>
-                    <h3 class="achievement-title">Continuous Learner</h3>
-                    <p class="achievement-desc">Automation & Programming Enthusiast</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section">
-            <h2 class="section-title">LET'S CONNECT</h2>
-            <p style="font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                Ready to elevate your quality assurance and build exceptional software? Let's discuss how my 13 years of experience can help your team succeed.
-                <br><br>
-                <em style="color: var(--neon-cyan);">Based in Swindon, UK - Available for exciting opportunities</em>
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text animate-slide-in">About Me</h2>
+            <p class="text-lg text-center max-w-3xl mx-auto mb-6 animate-slide-in" style="animation-delay: 0.2s;">
+                Test Lead and Quality Assurance Engineer with 13 years of experience in IT, application support, and software testing. Proven expertise in leading QA teams, building automation frameworks from scratch, and managing end-to-end testing across enterprise systems.
             </p>
-            <div class="contact-grid">
-                <a href="mailto:lukejames027@gmail.com" class="contact-card">
-                    <span class="contact-icon">📧</span>
-                    <h3 class="contact-title">EMAIL</h3>
-                    <p class="contact-info">lukejames027@gmail.com</p>
-                </a>
-                <a href="https://www.linkedin.com/in/lukejames27/" class="contact-card" target="_blank" rel="noopener">
-                    <span class="contact-icon">💼</span>
-                    <h3 class="contact-title">LINKEDIN</h3>
-                    <p class="contact-info">Connect with me<br>/in/lukejames27</p>
-                </a>
-                <a href="tel:+447881376794" class="contact-card">
-                    <span class="contact-icon">📱</span>
-                    <h3 class="contact-title">PHONE</h3>
-                    <p class="contact-info">Mobile<br>07881 376794</p>
-                </a>
-                <a href="https://github.com/lukejames27" class="contact-card" target="_blank" rel="noopener">
-                    <span class="contact-icon">💻</span>
-                    <h3 class="contact-title">GITHUB</h3>
-                    <p class="contact-info">Explore my work<br>/lukejames27</p>
-                </a>
-            </div>
-            
-            <div style="margin-top: 4rem; padding: 2rem; background: rgba(0, 255, 255, 0.05); border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                <h3 style="color: var(--neon-cyan); margin-bottom: 1rem; font-size: 1.5rem;">Quick Facts</h3>
-                <div style="text-align: left; color: rgba(255, 255, 255, 0.9); line-height: 2;">
-                    <p>📍 <strong>Location:</strong> Swindon, England, UK</p>
-                    <p>💼 <strong>Current:</strong> Test Lead @ Nationwide Building Society</p>
-                    <p>🎯 <strong>Expertise:</strong> C#, Selenium, SpecFlow, Cypress, Playwright</p>
-                    <p>🚀 <strong>Focus:</strong> Automation, CI/CD, Team Leadership</p>
-                    <p>⚽ <strong>Passion:</strong> Football, Travel, Tennis, Continuous Learning</p>
+            <p class="text-lg text-center max-w-3xl mx-auto animate-slide-in" style="animation-delay: 0.4s;">
+                Skilled in C#, Selenium, SpecFlow, Cypress, Playwright, and CI/CD pipelines. Recognized for driving quality improvements, mentoring engineers, and delivering high-quality, mission-critical projects within Agile environments. Based in Swindon, UK, I'm passionate about continuous learning, football (Swindon Town FC season ticket holder), travel, and tennis.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text animate-slide-in">Key Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-lift animate-slide-in" style="animation-delay: 0.2s;">
+                    <h3 class="text-xl font-semibold text-blue-600 mb-4">Automation</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>C#</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Selenium</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Ranorex</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>SpecFlow</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Cypress</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Playwright (TypeScript)</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Postman</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>API Testing</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-lift animate-slide-in" style="animation-delay: 0.3s;">
+                    <h3 class="text-xl font-semibold text-blue-600 mb-4">Cloud & Environments</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>AWS</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Azure</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Kubernetes Cluster Deployments</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-lift animate-slide-in" style="animation-delay: 0.4s;">
+                    <h3 class="text-xl font-semibold text-blue-600 mb-4">Frameworks & Practices</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>TDD</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>BDD</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Page Object Model</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>CI/CD with Jenkins/Groovy</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>GitHub Actions</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Ansible</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-lift animate-slide-in" style="animation-delay: 0.5s;">
+                    <h3 class="text-xl font-semibold text-blue-600 mb-4">Tools & Platforms</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Zephyr Scale</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>JIRA</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Git</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>SQL Server</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>MongoDB</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>IIS</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>PowerShell</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Active Directory</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Exchange</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-lift animate-slide-in" style="animation-delay: 0.6s;">
+                    <h3 class="text-xl font-semibold text-blue-600 mb-4">Leadership</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Test Strategy & Planning</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Stakeholder Management</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Team Mentoring & Training</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">•</span>Incident Management</li>
+                    </ul>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text animate-slide-in">Professional Experience</h2>
+            <div class="relative max-w-3xl mx-auto">
+                <div class="absolute top-0 bottom-0 left-1/2 w-0.5 bg-gray-200 -translate-x-1/2"></div>
+                <div class="space-y-12">
+                    <div class="flex relative experience-item">
+                        <div class="w-1/2 pr-8 experience-content glass p-6 rounded-lg hover-lift animate-slide-in">
+                            <div class="text-sm text-gray-500">Apr 2023 – Present</div>
+                            <h3 class="text-xl font-semibold text-blue-600">Test Lead</h3>
+                            <div class="text-blue-600">Nationwide Building Society – Swindon</div>
+                            <ul class="mt-4 space-y-2">
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Led QA activities for a buy-to-let mortgages scrum team after promotion.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Designed test strategies for a strategic programme.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Managed 6 engineers, running stand-ups and sprint planning.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Implemented CI/CD pipelines with Jenkins, GitHub Actions, and Ansible.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Trained manual testers in C# Selenium automation.</li>
+                            </ul>
+                            <div class="progress-bar mt-4 h-2 bg-gray-200 rounded-full">
+                                <div class="progress-fill bg-gradient-to-r from-blue-600 to-green-500 rounded-full" style="--progress-width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="absolute top-6 left-1/2 w-4 h-4 bg-blue-600 rounded-full timeline-dot -translate-x-1/2"></div>
+                    </div>
+                    <div class="flex relative experience-item flex-row-reverse">
+                        <div class="w-1/2 pl-8 experience-content glass p-6 rounded-lg hover-lift animate-slide-in">
+                            <div class="text-sm text-gray-500">Aug 2021 – Apr 2023</div>
+                            <h3 class="text-xl font-semibold text-blue-600">Test Engineer / Test Lead</h3>
+                            <div class="text-blue-600">Nationwide Building Society – Swindon</div>
+                            <ul class="mt-4 space-y-2">
+                                <li class="relative pr-6"><span class="absolute right-0 text-green-500">✓</span>Built API automation suites with C#/.NET, SpecFlow, RestSharp.</li>
+                                <li class="relative pr-6"><span class="absolute right-0 text-green-500">✓</span>Introduced Zephyr Scale for test management.</li>
+                                <li class="relative pr-6"><span class="absolute right-0 text-green-500">✓</span>Tested in AWS with Kubernetes clusters.</li>
+                                <li class="relative pr-6"><span class="absolute right-0 text-green-500">✓</span>Promoted agile best practices.</li>
+                            </ul>
+                            <div class="progress-bar mt-4 h-2 bg-gray-200 rounded-full">
+                                <div class="progress-fill bg-gradient-to-r from-blue-600 to-green-500 rounded-full" style="--progress-width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="absolute top-6 left-1/2 w-4 h-4 bg-blue-600 rounded-full timeline-dot -translate-x-1/2"></div>
+                    </div>
+                    <div class="flex relative experience-item">
+                        <div class="w-1/2 pr-8 experience-content glass p-6 rounded-lg hover-lift animate-slide-in">
+                            <div class="text-sm text-gray-500">Jul 2018 – Aug 2021</div>
+                            <h3 class="text-xl font-semibold text-blue-600">Quality Assurance Engineer</h3>
+                            <div class="text-blue-600">Cherwell Software – Swindon</div>
+                            <ul class="mt-4 space-y-2">
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Created 300+ automation tests with Selenium and Ranorex.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Implemented TDD to reduce defect leakage.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Received Cherwell Values Award (2020).</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Integrated testing into Jenkins and TeamCity pipelines.</li>
+                            </ul>
+                            <div class="progress-bar mt-4 h-2 bg-gray-200 rounded-full">
+                                <div class="progress-fill bg-gradient-to-r from-blue-600 to-green-500 rounded-full" style="--progress-width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="absolute top-6 left-1/2 w-4 h-4 bg-blue-600 rounded-full timeline-dot -translate-x-1/2"></div>
+                    </div>
+                    <div class="flex relative experience-item flex-row-reverse">
+                        <div class="w-1/2 pl-8 experience-content glass p-6 rounded-lg hover-lift animate-slide-in">
+                            <div class="text-sm text-gray-500">Aug 2014 – Jul 2018</div>
+                            <h3 class="text-xl font-semibold text-blue-600">Tier 3 Senior Product Support Analyst</h3>
+                            <div class="text-blue-600">Cherwell Software – Swindon</div>
+                            <ul class="mt-4 space-y-2">
+                                <li class="relative pr-6"><span class="absolute right-0 text-green-500">✓</span>Led escalations for enterprise clients.</li>
+                                <li class="relative pr-6"><span class="absolute right-0 text-green-500">✓</span>Produced RCA for P1 incidents.</li>
+                                <li class="relative pr-6"><span class="absolute right-0 text-green-500">✓</span>Awarded Global Hero recognition.</li>
+                                <li class="relative pr-6"><span class="absolute right-0 text-green-500">✓</span>Mentored Tier 1 and 2 analysts.</li>
+                            </ul>
+                            <div class="progress-bar mt-4 h-2 bg-gray-200 rounded-full">
+                                <div class="progress-fill bg-gradient-to-r from-blue-600 to-green-500 rounded-full" style="--progress-width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="absolute top-6 left-1/2 w-4 h-4 bg-blue-600 rounded-full timeline-dot -translate-x-1/2"></div>
+                    </div>
+                    <div class="flex relative experience-item">
+                        <div class="w-1/2 pr-8 experience-content glass p-6 rounded-lg hover-lift animate-slide-in">
+                            <div class="text-sm text-gray-500">Dec 2011 – Aug 2014</div>
+                            <h3 class="text-xl font-semibold text-blue-600">IT Service Desk Analyst</h3>
+                            <div class="text-blue-600">UK Shared Business Services – Swindon</div>
+                            <ul class="mt-4 space-y-2">
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Delivered 1st line IT support with Active Directory, Exchange.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Took on Incident Manager role.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-green-500">✓</span>Achieved ITIL Foundation certification.</li>
+                            </ul>
+                            <div class="progress-bar mt-4 h-2 bg-gray-200 rounded-full">
+                                <div class="progress-fill bg-gradient-to-r from-blue-600 to-green-500 rounded-full" style="--progress-width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="absolute top-6 left-1/2 w-4 h-4 bg-blue-600 rounded-full timeline-dot -translate-x-1/2"></div>
+                    </div>
+                    <div class="flex relative experience-item flex-row-reverse">
+                        <div class="w-1/2 pl-8 experience-content glass p-6 rounded-lg hover-lift animate-slide-in">
+                            <div class="text-sm text-gray-500">Dec 2011 – Aug 2014</div>
+                            <h3 class="text-xl font-semibold text-blue-600">Apprentice – Finance & Procurement</h3>
+                            <div class="text-blue-600">UK Shared Business Services – Swindon</div>
+                            <ul class="mt-4 space-y-2">
+                                <li class="relative pr-6"><span class="absolute right-0 text-green-500">✓</span>Handled customer escalations and invoice processing.</li>
+                                <li class="relative pr-6"><span class="absolute right-0 text-green-500">✓</span>Received Quality Monitoring Award.</li>
+                            </ul>
+                            <div class="progress-bar mt-4 h-2 bg-gray-200 rounded-full">
+                                <div class="progress-fill bg-gradient-to-r from-blue-600 to-green-500 rounded-full" style="--progress-width: 70%;"></div>
+                            </div>
+                        </div>
+                        <div class="absolute top-6 left-1/2 w-4 h-4 bg-blue-600 rounded-full timeline-dot -translate-x-1/2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text animate-slide-in">Awards & Achievements</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-lift text-center animate-slide-in" style="animation-delay: 0.2s;">
+                    <div class="text-3xl mb-4">🏆</div>
+                    <h3 class="text-lg font-semibold">Test Lead Promotion</h3>
+                    <p class="text-sm text-gray-600">Nationwide Building Society - 2023</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-lift text-center animate-slide-in" style="animation-delay: 0.3s;">
+                    <div class="text-3xl mb-4">⚡</div>
+                    <h3 class="text-lg font-semibold">Values Award</h3>
+                    <p class="text-sm text-gray-600">Cherwell Software - 2020</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-lift text-center animate-slide-in" style="animation-delay: 0.4s;">
+                    <div class="text-3xl mb-4">🌟</div>
+                    <h3 class="text-lg font-semibold">Global Hero Award</h3>
+                    <p class="text-sm text-gray-600">Cherwell Software - 2015</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-lift text-center animate-slide-in" style="animation-delay: 0.5s;">
+                    <div class="text-3xl mb-4">🎯</div>
+                    <h3 class="text-lg font-semibold">Quality Monitoring Award</h3>
+                    <p class="text-sm text-gray-600">UK Shared Business Services - 2012</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-lift text-center animate-slide-in" style="animation-delay: 0.6s;">
+                    <div class="text-3xl mb-4">📚</div>
+                    <h3 class="text-lg font-semibold">ITIL v3 Foundation</h3>
+                    <p class="text-sm text-gray-600">Certified IT Service Management</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-lift text-center animate-slide-in" style="animation-delay: 0.7s;">
+                    <div class="text-3xl mb-4">🔧</div>
+                    <h3 class="text-lg font-semibold">Cherwell Certified</h3>
+                    <p class="text-sm text-gray-600">Professional Designer & Administrator</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text animate-slide-in">Get in Touch</h2>
+            <p class="text-lg text-center max-w-xl mx-auto mb-8 animate-slide-in" style="animation-delay: 0.2s;">
+                I'm always open to new opportunities and collaborations. Feel free to reach out!
+            </p>
+            <div class="flex justify-center space-x-8 flex-wrap animate-slide-in" style="animation-delay: 0.4s;">
+                <a href="tel:07881376794" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                    <span class="mr-2">📞</span> 07881 376794
+                </a>
+                <a href="mailto:lukejames027@gmail.com" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                    <span class="mr-2">✉️</span> lukejames027@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/lukejames27/" target="_blank" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                    <span class="mr-2">🔗</span> LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6 text-center">
+        <div class="container mx-auto px-6">
+            &copy; 2025 Luke James. All rights reserved.
+        </div>
+    </footer>
 
     <script>
-        // Performance monitoring variables
-        let frameCount = 0;
-        let lastTime = performance.now();
-        let loadStartTime = performance.now();
-        
-        // Initialize all systems when loaded
-        window.addEventListener('load', () => {
-            initializeQuantumSystems();
-            measurePerformance();
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
 
-        function initializeQuantumSystems() {
-            // Loading screen with quantum effects
-            // Note: No loader in HTML, skipping or assuming it's removed
-            
-            // Initialize all subsystems
-            initializeCursor();
-            initializeMatrixRain();
-            initializeFloatingCode();
-            initializeAudioVisualizer();
-            initializeThemeSwitcher();
-            initializeScrollEffects();
-            initializeTerminalAnimation();
-            initializeParticleSystem();
-            initializeNeuralNetworkBackground();
-            initializeSoundEffects();
-        }
-
-        // Enhanced Custom Cursor with Trails
-        function initializeCursor() {
-            if (window.innerWidth <= 768) return; // Skip on mobile
-            
-            const cursor = document.getElementById('cursor');
-            const trails = [
-                document.getElementById('cursor-trail-1'),
-                document.getElementById('cursor-trail-2'),
-                document.getElementById('cursor-trail-3')
-            ];
-            
-            let mouseX = 0, mouseY = 0;
-            let cursorX = 0, cursorY = 0;
-            
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
-            
-            function updateCursor() {
-                // Smooth cursor following
-                cursorX += (mouseX - cursorX) * 0.1;
-                cursorY += (mouseY - cursorY) * 0.1;
-                
-                cursor.style.left = cursorX - 10 + 'px';
-                cursor.style.top = cursorY - 10 + 'px';
-                
-                // Update trails with different delays
-                trails.forEach((trail, index) => {
-                    const delay = (index + 1) * 0.05;
-                    const trailX = cursorX + (mouseX - cursorX) * delay;
-                    const trailY = cursorY + (mouseY - cursorY) * delay;
-                    
-                    trail.style.left = trailX - 4 + 'px';
-                    trail.style.top = trailY - 4 + 'px';
-                });
-                
-                requestAnimationFrame(updateCursor);
-            }
-            
-            updateCursor();
-            
-            // Enhanced hover effects
-            const hoverElements = document.querySelectorAll('a, button, .skill-card, .project-card, .achievement-badge, .contact-card');
-            hoverElements.forEach(element => {
-                element.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'scale(2)';
-                    cursor.style.borderColor = 'var(--neon-purple)';
-                    cursor.style.boxShadow = '0 0 30px var(--neon-purple)';
-                    trails.forEach(trail => {
-                        trail.style.transform = 'scale(1.5)';
-                        trail.style.background = 'var(--neon-purple)';
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-in');
+                    entry.target.querySelectorAll('.progress-fill').forEach(fill => {
+                        fill.classList.add('active');
                     });
-                    
-                    // Sound effect
-                    if (window.playHoverSound) window.playHoverSound();
-                });
-                
-                element.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'scale(1)';
-                    cursor.style.borderColor = 'var(--neon-cyan)';
-                    cursor.style.boxShadow = '0 0 20px var(--neon-cyan)';
-                    trails.forEach(trail => {
-                        trail.style.transform = 'scale(1)';
-                        trail.style.background = 'var(--neon-cyan)';
-                    });
-                });
-            });
-        }
-
-        // Matrix Rain Effect
-        function initializeMatrixRain() {
-            const matrixContainer = document.getElementById('matrix-rain');
-            const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-            
-            function createMatrixColumn() {
-                const column = document.createElement('div');
-                column.className = 'matrix-column';
-                column.style.left = Math.random() * 100 + '%';
-                column.style.animationDuration = Math.random() * 3 + 2 + 's';
-                column.style.opacity = Math.random() * 0.5 + 0.1;
-                column.style.fontSize = Math.random() * 10 + 8 + 'px';
-                
-                let text = '';
-                const columnHeight = Math.floor(Math.random() * 20) + 10;
-                
-                for (let i = 0; i < columnHeight; i++) {
-                    text += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
-                }
-                
-                column.innerHTML = text;
-                matrixContainer.appendChild(column);
-                
-                setTimeout(() => {
-                    if (column.parentNode) column.remove();
-                }, 5000);
-            }
-            
-            // Create new columns periodically
-            setInterval(createMatrixColumn, 300);
-        }
-
-        // Floating Code Snippets
-        function initializeFloatingCode() {
-            const container = document.getElementById('floating-code-container');
-            const codeSnippets = [
-                '@Test public void quantumTest() {}',
-                'driver.findElement(By.ai("smart-locator"))',
-                'await expect(neuralNetwork).toBeActive()',
-                'selenium.quantum.execute(parallelDimensions)',
-                'AI.predictFailure().preventBug()',
-                'testFramework.selfHeal().adapt()',
-                'const quantum = new TestEngine()',
-                'expect(automation).toBe(revolutionary)'
-            ];
-            
-            function createFloatingCode() {
-                const code = document.createElement('div');
-                code.className = 'floating-code';
-                code.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-                code.style.top = Math.random() * 100 + 'vh';
-                code.style.left = '-200px';
-                code.style.color = `hsl(${Math.random() * 60 + 180}, 70%, 60%)`;
-                code.style.fontSize = Math.random() * 6 + 8 + 'px';
-                code.style.animationDuration = Math.random() * 10 + 10 + 's';
-                
-                container.appendChild(code);
-                
-                setTimeout(() => {
-                    if (code.parentNode) code.remove();
-                }, 20000);
-            }
-            
-            setInterval(createFloatingCode, 2000);
-        }
-
-        // Audio Visualizer Animation
-        function initializeAudioVisualizer() {
-            const bars = document.querySelectorAll('.visualizer-bar');
-            
-            function animateVisualizer() {
-                bars.forEach(bar => {
-                    const height = Math.random() * 40 + 10;
-                    bar.style.height = height + 'px';
-                    bar.style.background = `hsl(${180 + Math.random() * 60}, 70%, 60%)`;
-                });
-            }
-            
-            setInterval(animateVisualizer, 200);
-            
-            // Click to toggle visualizer
-            document.getElementById('audio-viz').addEventListener('click', () => {
-                const viz = document.getElementById('audio-viz');
-                viz.style.transform = viz.style.transform === 'scale(1.1)' ? 'scale(1)' : 'scale(1.1)';
-                if (window.playClickSound) window.playClickSound();
-            });
-        }
-
-        // Theme Switcher
-        function initializeThemeSwitcher() {
-            const cyberBtn = document.getElementById('theme-cyber');
-            const matrixBtn = document.getElementById('theme-matrix');
-            const neonBtn = document.getElementById('theme-neon');
-            
-            cyberBtn.addEventListener('click', () => {
-                setTheme('cyber');
-                if (window.playClickSound) window.playClickSound();
-            });
-            
-            matrixBtn.addEventListener('click', () => {
-                setTheme('matrix');
-                if (window.playClickSound) window.playClickSound();
-            });
-            
-            neonBtn.addEventListener('click', () => {
-                setTheme('neon');
-                if (window.playClickSound) window.playClickSound();
-            });
-        }
-
-        function setTheme(theme) {
-            const root = document.documentElement;
-            
-            switch(theme) {
-                case 'cyber':
-                    root.style.setProperty('--neon-cyan', '#00ffff');
-                    root.style.setProperty('--neon-purple', '#8b5cf6');
-                    root.style.setProperty('--neon-green', '#00ff88');
-                    break;
-                case 'matrix':
-                    root.style.setProperty('--neon-cyan', '#00ff88');
-                    root.style.setProperty('--neon-purple', '#ffff00');
-                    root.style.setProperty('--neon-green', '#00ff00');
-                    break;
-                case 'neon':
-                    root.style.setProperty('--neon-cyan', '#ff006e');
-                    root.style.setProperty('--neon-purple', '#ff8c00');
-                    root.style.setProperty('--neon-green', '#ffff00');
-                    break;
-            }
-        }
-
-        // Scroll Effects and Progress
-        function initializeScrollEffects() {
-            const scrollProgress = document.getElementById('scroll-progress');
-            
-            window.addEventListener('scroll', () => {
-                const scrollPercent = window.pageYOffset / (document.body.scrollHeight - window.innerHeight);
-                scrollProgress.style.width = scrollPercent * 100 + '%';
-                
-                // Dynamic background shift
-                const hue1 = 180 + (scrollPercent * 80);
-                const hue2 = 240 + (scrollPercent * 60);
-                
-                document.documentElement.style.setProperty('--neon-cyan', `hsl(${hue1}, 100%, 50%)`);
-                document.documentElement.style.setProperty('--neon-purple', `hsl(${hue2}, 100%, 65%)`);
-                
-                // Parallax for hero section
-                const hero = document.querySelector('.hero-hologram');
-                if (hero) {
-                    const speed = window.pageYOffset * 0.3;
-                    hero.style.transform = `translateY(${speed}px) rotateX(${speed * 0.02}deg)`;
                 }
             });
+        }, { threshold: 0.1 });
 
-            // Smooth scrolling for navigation
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        if (window.playClickSound) window.playClickSound();
-                    }
-                });
-            });
+        document.querySelectorAll('section, .experience-item, .achievement-item').forEach(el => {
+            observer.observe(el);
+        });
 
-            // Intersection Observer for animations
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                        
-                        // Animate progress bars
-                        const progressFills = entry.target.querySelectorAll('.progress-fill');
-                        progressFills.forEach(fill => {
-                            const width = fill.getAttribute('data-width');
-                            setTimeout(() => {
-                                fill.style.width = width + '%';
-                            }, 500);
-                        });
-                    }
-                });
-            }, observerOptions);
-
-            // Observe all animatable elements
-            document.querySelectorAll('.skill-card, .project-card, .achievement-badge, .contact-card').forEach(card => {
-                observer.observe(card);
-            });
-        }
-
-        // Terminal Animation
-        function initializeTerminalAnimation() {
-            const terminalLines = document.querySelectorAll('.terminal-line');
-            
-            terminalLines.forEach((line, index) => {
-                setTimeout(() => {
-                    line.style.animationDelay = `${index * 0.5}s`;
-                }, index * 500);
-            });
-            
-            // Advanced terminal commands
-            const advancedCommands = [
-                'quantum_processor --optimize-algorithms',
-                'neural_network --train-test-patterns',
-                'ai_framework --self-evolve',
-                'security_scanner --quantum-encrypt',
-                'performance_monitor --real-time-analytics'
-            ];
-            
-            let commandIndex = 0;
-            const cursor = document.querySelector('.terminal-cursor');
-            const promptLine = cursor.parentElement;
-            
-            function typeCommand() {
-                if (commandIndex >= advancedCommands.length) {
-                    commandIndex = 0;
-                }
-                
-                const command = advancedCommands[commandIndex];
-                let charIndex = 0;
-                
-                function typeChar() {
-                    if (charIndex < command.length) {
-                        promptLine.textContent = command.substring(0, charIndex + 1);
-                        charIndex++;
-                        setTimeout(typeChar, 100);
-                    } else {
-                        setTimeout(() => {
-                            commandIndex++;
-                            setTimeout(typeCommand, 2000);
-                        }, 3000);
-                    }
-                }
-                
-                promptLine.textContent = '';
-                typeChar();
-            }
-            
-            setTimeout(typeCommand, 5000);
-        }
-
-        // Particle System for Interactions
-        function initializeParticleSystem() {
-            const particleContainer = document.getElementById('particle-system');
-            
-            document.addEventListener('click', (e) => {
-                createParticleBurst(e.clientX, e.clientY);
-                if (window.playClickSound) window.playClickSound();
-            });
-            
-            function createParticleBurst(x, y) {
-                const colors = ['--neon-cyan', '--neon-purple', '--neon-green', '--neon-pink', '--neon-yellow'];
-                
-                for (let i = 0; i < 15; i++) {
-                    const particle = document.createElement('div');
-                    particle.style.position = 'fixed';
-                    particle.style.width = '4px';
-                    particle.style.height = '4px';
-                    particle.style.borderRadius = '50%';
-                    particle.style.pointerEvents = 'none';
-                    particle.style.left = x + 'px';
-                    particle.style.top = y + 'px';
-                    particle.style.background = `var(${colors[Math.floor(Math.random() * colors.length)]})`;
-                    
-                    const angle = Math.random() * Math.PI * 2;
-                    const distance = Math.random() * 50 + 50;
-                    particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
-                    particle.style.opacity = '0';
-                    particle.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
-                    
-                    particleContainer.appendChild(particle);
-                    
-                    setTimeout(() => {
-                        particle.style.opacity = '1';
-                        particle.style.transform = `translate(${Math.cos(angle) * (distance + 100)}px, ${Math.sin(angle) * (distance + 100)}px) scale(0)`;
-                    }, 10);
-                    
-                    setTimeout(() => {
-                        if (particle.parentNode) particle.remove();
-                    }, 1200);
-                }
-            }
-        }
-
-        // Neural Network Background
-        function initializeNeuralNetworkBackground() {
-            const neuralBg = document.querySelector('.neural-bg');
-            
-            function createNeuralPulse() {
-                const pulse = document.createElement('div');
-                pulse.style.position = 'absolute';
-                pulse.style.width = '4px';
-                pulse.style.height = '4px';
-                pulse.style.background = 'var(--neon-cyan)';
-                pulse.style.borderRadius = '50%';
-                pulse.style.left = Math.random() * 100 + '%';
-                pulse.style.top = Math.random() * 100 + '%';
-                pulse.style.boxShadow = '0 0 20px var(--neon-cyan)';
-                pulse.style.animation = 'pulse 3s ease-in-out infinite';
-                
-                neuralBg.appendChild(pulse);
-                
-                setTimeout(() => {
-                    if (pulse.parentNode) pulse.remove();
-                }, 3000);
-            }
-            
-            setInterval(createNeuralPulse, 500);
-        }
-
-        // Sound Effects System
-        function initializeSoundEffects() {
-            // Create audio context for sound effects
-            let audioContext;
-            
-            try {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            } catch (e) {
-                console.log('Web Audio API not supported');
-                return;
-            }
-            
-            window.playHoverSound = function() {
-                if (!audioContext) return;
-                
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
-                
-                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-                gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.01);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.1);
-            };
-            
-            window.playClickSound = function() {
-                if (!audioContext) return;
-                
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.2);
-                
-                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-                gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.01);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.2);
-            };
-            
-            // Logo sound effect
-            document.getElementById('logo-sound').addEventListener('click', () => {
-                if (!audioContext) return;
-                
-                // Complex sound for logo
-                const frequencies = [440, 554.37, 659.25, 880];
-                frequencies.forEach((freq, index) => {
-                    setTimeout(() => {
-                        const osc = audioContext.createOscillator();
-                        const gain = audioContext.createGain();
-                        
-                        osc.connect(gain);
-                        gain.connect(audioContext.destination);
-                        
-                        osc.frequency.setValueAtTime(freq, audioContext.currentTime);
-                        gain.gain.setValueAtTime(0, audioContext.currentTime);
-                        gain.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.05);
-                        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
-                        
-                        osc.start(audioContext.currentTime);
-                        osc.stop(audioContext.currentTime + 0.4);
-                    }, index * 100);
-                });
-            });
-        }
-
-        // Performance Monitoring
-        function measurePerformance() {
-            const fpsCounter = document.getElementById('fps-counter');
-            const loadTimeElement = document.getElementById('load-time');
-            const memoryUsage = document.getElementById('memory-usage');
-            
-            // Calculate load time
-            const loadTime = ((performance.now() - loadStartTime) / 1000).toFixed(1);
-            loadTimeElement.textContent = loadTime + 's';
-            
-            // FPS monitoring
-            function updateFPS() {
-                frameCount++;
-                const now = performance.now();
-                const delta = now - lastTime;
-                
-                if (delta >= 1000) {
-                    const fps = Math.round((frameCount * 1000) / delta);
-                    fpsCounter.textContent = fps;
-                    frameCount = 0;
-                    lastTime = now;
-                }
-                
-                requestAnimationFrame(updateFPS);
-            }
-            
-            updateFPS();
-            
-            // Memory usage (if available)
-            if (performance.memory) {
-                setInterval(() => {
-                    const used = Math.round(performance.memory.usedJSHeapSize / 1024 / 1024);
-                    memoryUsage.textContent = used + 'MB';
-                }, 2000);
-            }
-        }
-
-        // Start quantum animations after loading
-        function startQuantumAnimations() {
-            // Add entrance animations to all cards
-            const cards = document.querySelectorAll('.skill-card, .project-card, .achievement-badge, .contact-card');
-            
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(50px) rotateX(45deg)';
-                card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-                
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0) rotateX(0)';
-                }, index * 200);
-            });
-            
-            // Add glow effects
-            const glowElements = document.querySelectorAll('.section-title, .hero-title, .skill-title, .project-title');
-            glowElements.forEach(element => {
-                element.style.animation += ', glow-pulse 4s ease-in-out infinite';
-            });
-        }
-
-        // Advanced Keyboard Shortcuts
-        document.addEventListener('keydown', (e) => {
-            // Konami code easter egg
-            const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-            window.konamiIndex = window.konamiIndex || 0;
-            
-            if (e.keyCode === konamiCode[window.konamiIndex]) {
-                window.konamiIndex++;
-                if (window.konamiIndex === konamiCode.length) {
-                    activateQuantumMode();
-                    window.konamiIndex = 0;
-                }
-            } else {
-                window.konamiIndex = 0;
-            }
-            
-            // Other shortcuts
-            switch(e.key) {
-                case 'h':
-                    if (e.ctrlKey) {
-                        e.preventDefault();
-                        document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
-                    }
-                    break;
-                case 's':
-                    if (e.ctrlKey) {
-                        e.preventDefault();
-                        document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
-                    }
-                    break;
-                case 'p':
-                    if (e.ctrlKey) {
-                        e.preventDefault();
-                        document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-                    }
-                    break;
-                case 'c':
-                    if (e.ctrlKey) {
-                        e.preventDefault();
-                        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-                    }
-                    break;
-                case 'Escape':
-                    // Reset all animations
-                    document.querySelectorAll('*').forEach(el => {
-                        el.style.animation = el.style.animation.replace(/quantum-mode[^,]*(,|$)/g, '');
-                    });
-                    break;
+        // Add subtle parallax effect
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('#hero');
+            if (hero) {
+                const scrollPosition = window.pageYOffset;
+                hero.style.backgroundPositionY = `${scrollPosition * 0.3}px`;
             }
         });
 
-        // Secret Quantum Mode
-        function activateQuantumMode() {
-            document.body.style.animation = 'quantum-glitch 5s ease-in-out';
-            
-            // Add quantum styles
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes quantum-glitch {
-                    0%, 100% { filter: hue-rotate(0deg) contrast(1); }
-                    20% { filter: hue-rotate(90deg) contrast(1.5) brightness(1.2); }
-                    40% { filter: hue-rotate(180deg) contrast(0.8) brightness(0.8); }
-                    60% { filter: hue-rotate(270deg) contrast(1.3) brightness(1.1); }
-                    80% { filter: hue-rotate(360deg) contrast(1.1) brightness(0.9); }
-                }
-                
-                @keyframes glow-pulse {
-                    0%, 100% { 
-                        text-shadow: 0 0 20px currentColor, 0 0 40px currentColor; 
-                    }
-                    50% { 
-                        text-shadow: 0 0 40px currentColor, 0 0 80px currentColor, 0 0 120px currentColor; 
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Create quantum particles
-            for (let i = 0; i < 100; i++) {
-                setTimeout(() => {
-                    const particle = document.createElement('div');
-                    particle.style.cssText = `
-                        position: fixed;
-                        top: ${Math.random() * 100}vh;
-                        left: ${Math.random() * 100}vw;
-                        width: 2px;
-                        height: 2px;
-                        background: hsl(${Math.random() * 360}, 70%, 70%);
-                        border-radius: 50%;
-                        pointer-events: none;
-                        z-index: 9999;
-                        animation: quantum-particle 3s ease-out forwards;
-                        box-shadow: 0 0 10px currentColor;
-                    `;
-                    
-                    const keyframes = `
-                        @keyframes quantum-particle {
-                            0% { transform: scale(0) rotate(0deg); opacity: 0; }
-                            50% { transform: scale(3) rotate(180deg); opacity: 1; }
-                            100% { transform: scale(0) rotate(360deg); opacity: 0; }
-                        }
-                    `;
-                    
-                    if (!document.querySelector('#quantum-keyframes')) {
-                        const keyframeStyle = document.createElement('style');
-                        keyframeStyle.id = 'quantum-keyframes';
-                        keyframeStyle.textContent = keyframes;
-                        document.head.appendChild(keyframeStyle);
-                    }
-                    
-                    document.body.appendChild(particle);
-                    
-                    setTimeout(() => {
-                        if (particle.parentNode) particle.remove();
-                    }, 3000);
-                }, i * 50);
-            }
-            
-            // Play quantum sound
-            if (window.playClickSound) {
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => window.playClickSound(), i * 200);
-                }
-            }
-            
-            setTimeout(() => {
-                document.body.style.animation = '';
-                style.remove();
-            }, 5000);
+        // Hover sound effects (basic, browser-safe)
+        let audioContext;
+        try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {
+            console.log('Web Audio API not supported');
         }
 
-        // Mobile optimizations
-        if (window.innerWidth <= 768) {
-            // Disable heavy animations on mobile
-            document.documentElement.style.setProperty('--reduced-motion', '1');
-            
-            // Simplify effects
-            const heavyElements = document.querySelectorAll('.matrix-rain, .floating-code-container, .audio-visualizer, .perf-metrics');
-            heavyElements.forEach(el => {
-                if (el) el.style.display = 'none';
-            });
+        function playHoverSound() {
+            if (!audioContext) return;
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.1);
         }
 
-        // Service Worker for PWA functionality
-        if ('serviceWorker' in navigator) {
-            const swCode = `
-                const CACHE_NAME = 'quantum-portfolio-v1';
-                const urlsToCache = [
-                    '/',
-                    '/styles.css',
-                    '/script.js'
-                ];
-
-                self.addEventListener('install', (event) => {
-                    event.waitUntil(
-                        caches.open(CACHE_NAME)
-                            .then((cache) => cache.addAll(urlsToCache))
-                    );
-                });
-
-                self.addEventListener('fetch', (event) => {
-                    event.respondWith(
-                        caches.match(event.request)
-                            .then((response) => {
-                                return response || fetch(event.request);
-                            })
-                    );
-                });
-            `;
-
-            const blob = new Blob([swCode], { type: 'application/javascript' });
-            const swUrl = URL.createObjectURL(blob);
-            
-            navigator.serviceWorker.register(swUrl)
-                .then((registration) => {
-                    console.log('Quantum Portfolio SW registered:', registration);
-                })
-                .catch((error) => {
-                    console.log('SW registration failed:', error);
-                });
-        }
-
-        // Initialize quantum effects on specific elements
-        setTimeout(() => {
-            document.querySelectorAll('.skill-card, .project-card').forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add('holographic');
-                }, index * 500);
-            });
-            
-            document.querySelectorAll('.tech-tag').forEach((tag, index) => {
-                setTimeout(() => {
-                    tag.classList.add('data-stream');
-                }, index * 100);
-            });
-        }, 4000);
-
-        // Console Easter Egg
-        console.log(`
-        ████████╗███████╗███████╗████████╗    ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗████████╗██╗   ██╗███╗   ███╗
-        ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝   ██╔═══██╗██║   ██║██╔══██╗████╗  ██║╚══██╔══╝██║   ██║████╗ ████║
-           ██║   █████╗  ███████╗   ██║      ██║   ██║██║   ██║███████║██╔██╗ ██║   ██║   ██║   ██║██╔████╔██║
-           ██║   ██╔══╝  ╚════██║   ██║      ██║▄▄ ██║██║   ██║██╔══██║██║╚██╗██║   ██║   ██║   ██║██║╚██╔╝██║
-           ██║   ███████╗███████║   ██║      ╚██████╔╝╚██████╔╝██║  ██║██║ ╚████║   ██║   ╚██████╔╝██║ ╚═╝ ██║
-           ╚═╝   ╚══════╝╚══════╝   ╚═╝       ╚══▀▀═╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝
-           
-        🚀 Welcome to the Quantum Portfolio! 
-        
-        Try these console commands:
-        - activateQuantumMode() - Enable quantum effects
-        - setTheme('cyber'|'matrix'|'neon') - Change theme
-        - Type Konami code (↑↑↓↓←→←→BA) for surprise!
-        
-        Keyboard shortcuts:
-        - Ctrl+H: Home
-        - Ctrl+S: Skills  
-        - Ctrl+P: Projects
-        - Ctrl+C: Contact
-        - ESC: Reset animations
-        
-        Made with ⚡ Quantum Technology by Luke James
-        `);
-
-        // Expose functions globally for console access
-        window.activateQuantumMode = activateQuantumMode;
-        window.setTheme = setTheme;
-
-        // Final initialization message
-        console.log('%c🎯 Quantum Portfolio Systems Online!', 'color: #00ffff; font-size: 16px; font-weight: bold;');
+        document.querySelectorAll('.hover-lift, .nav-link').forEach(el => {
+            el.addEventListener('mouseenter', playHoverSound);
+        });
     </script>
-</body>
-</html>
