@@ -307,11 +307,14 @@
             }
 
             .experience-timeline::before {
-                left: 0.5rem;
+                left: 0;
+                margin-left: 0.5rem;
+                z-index: 0;
             }
 
             .experience-item {
                 flex-direction: column !important;
+                position: relative;
                 align-items: flex-start;
             }
 
@@ -321,24 +324,25 @@
 
             .experience-content {
                 width: 100%;
-                padding-left: 2rem;
-                padding-right: 0.5rem;
+                margin-left: 1rem;
+                padding: 0.5rem;
             }
 
             .experience-item:nth-child(even) .experience-content {
                 width: 100%;
-                padding-left: 2rem;
-                padding-right: 0.5rem;
+                margin-left: 1rem;
+                padding: 0.5rem;
             }
 
             .timeline-dot {
-                left: 0.5rem;
-                transform: translateX(0);
+                left: 0;
+                margin-left: 0.5rem;
+                z-index: 1;
             }
 
             .experience-item:nth-child(even) .timeline-dot {
-                left: 0.5rem;
-                transform: translateX(0);
+                left: 0;
+                margin-left: 0.5rem;
             }
 
             .experience-desc li {
@@ -395,7 +399,7 @@
                 <a href="#about" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">About</a>
                 <a href="#skills" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Skills</a>
                 <a href="#projects" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Projects</a>
-                <a href="#experience" class="nav-link text-glass-600 hover:text-blue-600 font-medium transition-all">Experience</a>
+                <a href="#experience" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Experience</a>
                 <a href="#achievements" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Achievements</a>
                 <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 font-medium transition-all">Contact</a>
             </nav>
@@ -532,10 +536,10 @@
         <div class="container mx-auto px-6">
             <h2 class="section-title text-4xl font-extrabold text-center mb-12 gradient-text animate-fade-in">Professional Experience</h2>
             <div class="relative max-w-3xl mx-auto experience-timeline">
-                <div class="absolute top-0 bottom-0 left-1/2 w-1 bg-gradient-to-b from-blue-600 to-cyan-400 -translate-x-1/2"></div>
+                <div class="absolute top-0 bottom-0 w-1 bg-gradient-to-b from-blue-600 to-cyan-400" style="margin-left: 0.5rem; z-index: 0;"></div>
                 <div class="space-y-12">
                     <div class="flex relative experience-item animate-fade-in">
-                        <div class="experience-content w-1/2 pr-8 glass p-6 rounded-lg hover-scale neon-border">
+                        <div class="experience-content w-full glass p-6 rounded-lg hover-scale neon-border" style="margin-left: 1rem;">
                             <div class="text-sm text-gray-500">Apr 2023 – Present</div>
                             <h3 class="text-xl font-semibold text-gray-800">Test Lead</h3>
                             <div class="text-blue-600">Nationwide Building Society – Swindon</div>
@@ -550,10 +554,10 @@
                                 <div class="progress-fill bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full" style="--progress-width: 95%;"></div>
                             </div>
                         </div>
-                        <div class="absolute top-6 left-1/2 w-5 h-5 bg-cyan-400 rounded-full timeline-dot -translate-x-1/2 glow-effect"></div>
+                        <div class="absolute top-6 w-5 h-5 bg-cyan-400 rounded-full timeline-dot" style="margin-left: 0.5rem; z-index: 1;"></div>
                     </div>
                     <div class="flex relative experience-item animate-fade-in" style="animation-delay: 0.2s;">
-                        <div class="experience-content w-1/2 pl-8 glass p-6 rounded-lg hover-scale neon-border">
+                        <div class="experience-content w-full glass p-6 rounded-lg hover-scale neon-border" style="margin-left: 1rem;">
                             <div class="text-sm text-gray-500">Aug 2021 – Apr 2023</div>
                             <h3 class="text-xl font-semibold text-gray-800">Test Engineer / Test Lead</h3>
                             <div class="text-blue-600">Nationwide Building Society – Swindon</div>
@@ -567,10 +571,10 @@
                                 <div class="progress-fill bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full" style="--progress-width: 90%;"></div>
                             </div>
                         </div>
-                        <div class="absolute top-6 left-1/2 w-5 h-5 bg-cyan-400 rounded-full timeline-dot -translate-x-1/2 glow-effect"></div>
+                        <div class="absolute top-6 w-5 h-5 bg-cyan-400 rounded-full timeline-dot" style="margin-left: 0.5rem; z-index: 1;"></div>
                     </div>
                     <div class="flex relative experience-item animate-fade-in" style="animation-delay: 0.4s;">
-                        <div class="experience-content w-1/2 pr-8 glass p-6 rounded-lg hover-scale neon-border">
+                        <div class="experience-content w-full glass p-6 rounded-lg hover-scale neon-border" style="margin-left: 1rem;">
                             <div class="text-sm text-gray-500">Jul 2018 – Aug 2021</div>
                             <h3 class="text-xl font-semibold text-gray-800">Quality Assurance Engineer</h3>
                             <div class="text-blue-600">Cherwell Software – Swindon</div>
@@ -584,10 +588,10 @@
                                 <div class="progress-fill bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full" style="--progress-width: 85%;"></div>
                             </div>
                         </div>
-                        <div class="absolute top-6 left-1/2 w-5 h-5 bg-cyan-400 rounded-full timeline-dot -translate-x-1/2 glow-effect"></div>
+                        <div class="absolute top-6 w-5 h-5 bg-cyan-400 rounded-full timeline-dot" style="margin-left: 0.5rem; z-index: 1;"></div>
                     </div>
                     <div class="flex relative experience-item animate-fade-in" style="animation-delay: 0.6s;">
-                        <div class="experience-content w-1/2 pl-8 glass p-6 rounded-lg hover-scale neon-border">
+                        <div class="experience-content w-full glass p-6 rounded-lg hover-scale neon-border" style="margin-left: 1rem;">
                             <div class="text-sm text-gray-500">Aug 2014 – Jul 2018</div>
                             <h3 class="text-xl font-semibold text-gray-800">Tier 3 Senior Product Support Analyst</h3>
                             <div class="text-blue-600">Cherwell Software – Swindon</div>
@@ -601,10 +605,10 @@
                                 <div class="progress-fill bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full" style="--progress-width: 80%;"></div>
                             </div>
                         </div>
-                        <div class="absolute top-6 left-1/2 w-5 h-5 bg-cyan-400 rounded-full timeline-dot -translate-x-1/2 glow-effect"></div>
+                        <div class="absolute top-6 w-5 h-5 bg-cyan-400 rounded-full timeline-dot" style="margin-left: 0.5rem; z-index: 1;"></div>
                     </div>
                     <div class="flex relative experience-item animate-fade-in" style="animation-delay: 0.8s;">
-                        <div class="experience-content w-1/2 pr-8 glass p-6 rounded-lg hover-scale neon-border">
+                        <div class="experience-content w-full glass p-6 rounded-lg hover-scale neon-border" style="margin-left: 1rem;">
                             <div class="text-sm text-gray-500">Dec 2011 – Aug 2014</div>
                             <h3 class="text-xl font-semibold text-gray-800">IT Service Desk Analyst</h3>
                             <div class="text-blue-600">UK Shared Business Services – Swindon</div>
@@ -617,10 +621,10 @@
                                 <div class="progress-fill bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full" style="--progress-width: 75%;"></div>
                             </div>
                         </div>
-                        <div class="absolute top-6 left-1/2 w-5 h-5 bg-cyan-400 rounded-full timeline-dot -translate-x-1/2 glow-effect"></div>
+                        <div class="absolute top-6 w-5 h-5 bg-cyan-400 rounded-full timeline-dot" style="margin-left: 0.5rem; z-index: 1;"></div>
                     </div>
                     <div class="flex relative experience-item animate-fade-in" style="animation-delay: 1s;">
-                        <div class="experience-content w-1/2 pl-8 glass p-6 rounded-lg hover-scale neon-border">
+                        <div class="experience-content w-full glass p-6 rounded-lg hover-scale neon-border" style="margin-left: 1rem;">
                             <div class="text-sm text-gray-500">Dec 2011 – Aug 2014</div>
                             <h3 class="text-xl font-semibold text-gray-800">Apprentice – Finance & Procurement</h3>
                             <div class="text-blue-600">UK Shared Business Services – Swindon</div>
@@ -632,7 +636,7 @@
                                 <div class="progress-fill bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full" style="--progress-width: 70%;"></div>
                             </div>
                         </div>
-                        <div class="absolute top-6 left-1/2 w-5 h-5 bg-cyan-400 rounded-full timeline-dot -translate-x-1/2 glow-effect"></div>
+                        <div class="absolute top-6 w-5 h-5 bg-cyan-400 rounded-full timeline-dot" style="margin-left: 0.5rem; z-index: 1;"></div>
                     </div>
                 </div>
             </div>
