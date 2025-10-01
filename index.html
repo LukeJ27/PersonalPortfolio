@@ -755,10 +755,11 @@
             });
         });
 
-        // Specific Handler for Hero Buttons
+        // Specific Handler for Hero Buttons with Debugging
         document.querySelectorAll('#hero a.no-scroll').forEach(link => {
             link.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
+                console.log('Hero button clicked:', href); // Debug log
                 if (href === '#contact') {
                     e.preventDefault();
                     document.querySelector(href).scrollIntoView({
@@ -766,6 +767,7 @@
                     });
                 } else if (this.hasAttribute('download')) {
                     // Allow download to proceed naturally
+                    console.log('Download triggered:', href);
                 }
             });
         });
