@@ -24,444 +24,71 @@
             --success: #10b981;
             --warning: #f59e0b;
             --error: #ef4444;
-        // Sound Effects System
-        function initializeSoundEffects() {
-            // Create audio context for sound effects
-            let audioContext;
-            
-            try {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            } catch (e) {
-                console.log('Web Audio API not supported');
-                return;
-            }
-            
-            window.playHoverSound = function() {
-                if (!audioContext) return;
-                
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
-                
-                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-                gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.01);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.1);
-            };
-            
-            window.playClickSound = function() {
-                if (!audioContext) return;
-                
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.2);
-                
-                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-                gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.01);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.2);
-            };
-            
-            // Logo sound effect
-            document.getElementById('logo-sound').addEventListener('click', () => {
-                if (!audioContext) return;
-                
-                // Complex sound for logo
-                const frequencies = [440, 554.37, 659.25, 880];
-                frequencies.forEach((freq, index) => {
-                    setTimeout(() => {
-                        const osc = audioContext.createOscillator();
-                        const gain = audioContext.createGain();
-                        
-                        osc.connect(gain);
-                        gain.connect(audioContext.destination);
-                        
-                        osc.frequency.setValueAtTime(freq, audioContext.currentTime);
-                        gain.gain.setValueAtTime(0, audioContext.currentTime);
-                        gain.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.05);
-                        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
-                        
-                        osc.start(audioContext.currentTime);
-                        osc.stop(audioContext.currentTime + 0.4);
-                    }, index * 100);
-                });
-            });
         }
 
-        // Performance Monitoring
-        function measurePerformance() {
-            const fpsCounter = document.getElementById('fps-counter');
-            const loadTimeElement = document.getElementById('load-time');
-            const memoryUsage = document.getElementById('memory-usage');
-            
-            // Calculate load time
-            const loadTime = ((performance.now() - loadStartTime) / 1000).toFixed(1);
-            loadTimeElement.textContent = loadTime + 's';
-            
-            // FPS monitoring
-            function updateFPS() {
-                frameCount++;
-                const now = performance.now();
-                const delta = now - lastTime;
-                
-                if (delta >= 1000) {
-                    const fps = Math.round((frameCount * 1000) / delta);
-                    fpsCounter.textContent = fps;
-                    frameCount = 0;
-                    lastTime = now;
-                }
-                
-                requestAnimationFrame(updateFPS);
-            }
-            
-            updateFPS();
-            
-            // Memory usage (if available)
-            if (performance.memory) {
-                setInterval(() => {
-                    const used = Math.round(performance.memory.usedJSHeapSize / 1024 / 1024);
-                    memoryUsage.textContent = used + 'MB';
-                }, 2000);
-            }
+        /* Quantum Mode Styles */
+        .quantum-active {
+            animation: quantum-pulse 2s ease-in-out infinite;
         }
-
-        // Start quantum animations after loading
-        function startQuantumAnimations() {
-            // Add entrance animations to all cards
-            const cards = document.querySelectorAll('.skill-card, .project-card, .achievement-badge, .contact-card');
-            
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(50px) rotateX(45deg)';
-                card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-                
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0) rotateX(0)';
-                }, index * 200);
-            });
-            
-            // Add glow effects
-            const glowElements = document.querySelectorAll('.section-title, .hero-title, .skill-title, .project-title');
-            glowElements.forEach(element => {
-                element.style.animation += ', glow-pulse 4s ease-in-out infinite';
-            });
-        }
-
-        // Advanced Keyboard Shortcuts
-        document.addEventListener('keydown', (e) => {
-            // Konami code easter egg
-            const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-            window.konamiIndex = window.konamiIndex || 0;
-            
-            if (e.keyCode === konamiCode[window.konamiIndex]) {
-                window.konamiIndex++;
-                if (window.konamiIndex === konamiCode.length) {
-                    activateQuantumMode();
-                    window.konamiIndex = 0;
-                }
-            } else {
-                window.konamiIndex = 0;
-            }
-            
-            // Other shortcuts
-            switch(e.key) {
-                case 'h':
-                    if (e.ctrlKey) {
-                        e.preventDefault();
-                        document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
-                    }
-                    break;
-                case 's':
-                    if (e.ctrlKey) {
-                        e.preventDefault();
-                        document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
-                    }
-                    break;
-                case 'p':
-                    if (e.ctrlKey) {
-                        e.preventDefault();
-                        document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-                    }
-                    break;
-                case 'c':
-                    if (e.ctrlKey) {
-                        e.preventDefault();
-                        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-                    }
-                    break;
-                case 'Escape':
-                    // Reset all animations
-                    document.querySelectorAll('*').forEach(el => {
-                        el.style.animation = el.style.animation.replace(/quantum-mode[^,]*(,|$)/g, '');
-                    });
-                    break;
-            }
-        });
-
-        // Secret Quantum Mode
-        function activateQuantumMode() {
-            document.body.style.animation = 'quantum-glitch 5s ease-in-out';
-            
-            // Add quantum styles
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes quantum-glitch {
-                    0%, 100% { filter: hue-rotate(0deg) contrast(1); }
-                    20% { filter: hue-rotate(90deg) contrast(1.5) brightness(1.2); }
-                    40% { filter: hue-rotate(180deg) contrast(0.8) brightness(0.8); }
-                    60% { filter: hue-rotate(270deg) contrast(1.3) brightness(1.1); }
-                    80% { filter: hue-rotate(360deg) contrast(1.1) brightness(0.9); }
-                }
-                
-                @keyframes glow-pulse {
-                    0%, 100% { 
-                        text-shadow: 0 0 20px currentColor, 0 0 40px currentColor; 
-                    }
-                    50% { 
-                        text-shadow: 0 0 40px currentColor, 0 0 80px currentColor, 0 0 120px currentColor; 
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Create quantum particles
-            for (let i = 0; i < 100; i++) {
-                setTimeout(() => {
-                    const particle = document.createElement('div');
-                    particle.style.cssText = `
-                        position: fixed;
-                        top: ${Math.random() * 100}vh;
-                        left: ${Math.random() * 100}vw;
-                        width: 2px;
-                        height: 2px;
-                        background: hsl(${Math.random() * 360}, 70%, 70%);
-                        border-radius: 50%;
-                        pointer-events: none;
-                        z-index: 9999;
-                        animation: quantum-particle 3s ease-out forwards;
-                        box-shadow: 0 0 10px currentColor;
-                    `;
-                    
-                    const keyframes = `
-                        @keyframes quantum-particle {
-                            0% { transform: scale(0) rotate(0deg); opacity: 0; }
-                            50% { transform: scale(3) rotate(180deg); opacity: 1; }
-                            100% { transform: scale(0) rotate(360deg); opacity: 0; }
-                        }
-                    `;
-                    
-                    if (!document.querySelector('#quantum-keyframes')) {
-                        const keyframeStyle = document.createElement('style');
-                        keyframeStyle.id = 'quantum-keyframes';
-                        keyframeStyle.textContent = keyframes;
-                        document.head.appendChild(keyframeStyle);
-                    }
-                    
-                    document.body.appendChild(particle);
-                    
-                    setTimeout(() => {
-                        if (particle.parentNode) particle.remove();
-                    }, 3000);
-                }, i * 50);
-            }
-            
-            // Play quantum sound
-            if (window.playClickSound) {
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => window.playClickSound(), i * 200);
-                }
-            }
-            
-            setTimeout(() => {
-                document.body.style.animation = '';
-                style.remove();
-            }, 5000);
-        }
-
-        // Mobile optimizations
-        if (window.innerWidth <= 768) {
-            // Disable heavy animations on mobile
-            document.documentElement.style.setProperty('--reduced-motion', '1');
-            
-            // Simplify effects
-            const heavyElements = document.querySelectorAll('.matrix-rain, .floating-code-container, .audio-visualizer, .perf-metrics');
-            heavyElements.forEach(el => {
-                if (el) el.style.display = 'none';
-            });
-        }
-
-        // Service Worker for PWA functionality
-        if ('serviceWorker' in navigator) {
-            const swCode = `
-                const CACHE_NAME = 'quantum-portfolio-v1';
-                const urlsToCache = [
-                    '/',
-                    '/styles.css',
-                    '/script.js'
-                ];
-
-                self.addEventListener('install', (event) => {
-                    event.waitUntil(
-                        caches.open(CACHE_NAME)
-                            .then((cache) => cache.addAll(urlsToCache))
-                    );
-                });
-
-                self.addEventListener('fetch', (event) => {
-                    event.respondWith(
-                        caches.match(event.request)
-                            .then((response) => {
-                                return response || fetch(event.request);
-                            })
-                    );
-                });
-            `;
-
-            const blob = new Blob([swCode], { type: 'application/javascript' });
-            const swUrl = URL.createObjectURL(blob);
-            
-            navigator.serviceWorker.register(swUrl)
-                .then((registration) => {
-                    console.log('Quantum Portfolio SW registered:', registration);
-                })
-                .catch((error) => {
-                    console.log('SW registration failed:', error);
-                });
-        }
-
-        // Add CSS for new animations
-        const additionalStyles = document.createElement('style');
-        additionalStyles.textContent = `
-            /* Quantum Mode Styles */
-            .quantum-active {
-                animation: quantum-pulse 2s ease-in-out infinite;
-            }
-            
-            @keyframes quantum-pulse {
-                0%, 100% { 
-                    transform: scale(1);
-                    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-                }
-                50% { 
-                    transform: scale(1.05);
-                    box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
-                }
-            }
-            
-            /* Enhanced Glow Effects */
-            .glow-text {
-                text-shadow: 
-                    0 0 10px currentColor,
-                    0 0 20px currentColor,
-                    0 0 40px currentColor,
-                    0 0 80px currentColor;
-            }
-            
-            /* Holographic Effect */
-            .holographic {
-                background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-                background-size: 200% 200%;
-                animation: holographic-sweep 3s ease-in-out infinite;
-            }
-            
-            @keyframes holographic-sweep {
-                0% { background-position: -200% -200%; }
-                100% { background-position: 200% 200%; }
-            }
-            
-            /* Data Stream Effect */
-            .data-stream {
-                position: relative;
-                overflow: hidden;
-            }
-            
-            .data-stream::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg, 
-                    transparent, 
-                    rgba(0, 255, 255, 0.4), 
-                    transparent);
-                animation: data-flow 2s ease-in-out infinite;
-            }
-            
-            @keyframes data-flow {
-                0% { left: -100%; }
-                100% { left: 100%; }
-            }
-        `;
         
-        document.head.appendChild(additionalStyles);
-
-        // Initialize quantum effects on specific elements
-        setTimeout(() => {
-            document.querySelectorAll('.skill-card, .project-card').forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add('holographic');
-                }, index * 500);
-            });
-            
-            document.querySelectorAll('.tech-tag').forEach((tag, index) => {
-                setTimeout(() => {
-                    tag.classList.add('data-stream');
-                }, index * 100);
-            });
-        }, 4000);
-
-        // Console Easter Egg
-        console.log(`
-        ████████╗███████╗███████╗████████╗    ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗████████╗██╗   ██╗███╗   ███╗
-        ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝   ██╔═══██╗██║   ██║██╔══██╗████╗  ██║╚══██╔══╝██║   ██║████╗ ████║
-           ██║   █████╗  ███████╗   ██║      ██║   ██║██║   ██║███████║██╔██╗ ██║   ██║   ██║   ██║██╔████╔██║
-           ██║   ██╔══╝  ╚════██║   ██║      ██║▄▄ ██║██║   ██║██╔══██║██║╚██╗██║   ██║   ██║   ██║██║╚██╔╝██║
-           ██║   ███████╗███████║   ██║      ╚██████╔╝╚██████╔╝██║  ██║██║ ╚████║   ██║   ╚██████╔╝██║ ╚═╝ ██║
-           ╚═╝   ╚══════╝╚══════╝   ╚═╝       ╚══▀▀═╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝
-           
-        🚀 Welcome to the Quantum Portfolio! 
+        @keyframes quantum-pulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
+            }
+        }
         
-        Try these console commands:
-        - activateQuantumMode() - Enable quantum effects
-        - setTheme('cyber'|'matrix'|'neon') - Change theme
-        - Type Konami code (↑↑↓↓←→←→BA) for surprise!
+        /* Enhanced Glow Effects */
+        .glow-text {
+            text-shadow: 
+                0 0 10px currentColor,
+                0 0 20px currentColor,
+                0 0 40px currentColor,
+                0 0 80px currentColor;
+        }
         
-        Keyboard shortcuts:
-        - Ctrl+H: Home
-        - Ctrl+S: Skills  
-        - Ctrl+P: Projects
-        - Ctrl+C: Contact
-        - ESC: Reset animations
+        /* Holographic Effect */
+        .holographic {
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            background-size: 200% 200%;
+            animation: holographic-sweep 3s ease-in-out infinite;
+        }
         
-        Made with ⚡ Quantum Technology by Luke James
-        `);
+        @keyframes holographic-sweep {
+            0% { background-position: -200% -200%; }
+            100% { background-position: 200% 200%; }
+        }
+        
+        /* Data Stream Effect */
+        .data-stream {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .data-stream::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 255, 255, 0.4), 
+                transparent);
+            animation: data-flow 2s ease-in-out infinite;
+        }
+        
+        @keyframes data-flow {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
 
-        // Expose functions globally for console access
-        window.activateQuantumMode = activateQuantumMode;
-        window.setTheme = setTheme;
-
-        // Final initialization message
-        console.log('%c🎯 Quantum Portfolio Systems Online!', 'color: #00ffff; font-size: 16px; font-weight: bold;');
-    </script>
-</body>
-</html>* {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -1630,224 +1257,10 @@
             margin: 5px 0;
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-        }
-
-        .perf-value {
-            color: var(--neon-cyan);
-            font-weight: 600;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 1024px) {
-            .skills-grid,
-            .projects-grid {
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-                gap: 2rem;
-            }
-            
-            .contact-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-items {
-                display: none;
-            }
-            
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .skills-grid,
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .floating-code,
-            .audio-visualizer,
-            .perf-metrics {
-                display: none;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-            
-            .project-metrics {
-                grid-template-columns: 1fr;
-            }
-            
-            body {
-                cursor: default;
-            }
-            
-            .cursor,
-            .cursor-trail {
-                display: none;
-            }
-        }
-
-        /* Loading Screen Animation */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 0.8s ease;
-        }
-
-        .loader-logo {
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, 
-                var(--neon-cyan), 
-                var(--neon-purple), 
-                var(--neon-green));
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: 
-                gradient-shift 2s ease infinite,
-                pulse-scale 3s ease-in-out infinite;
-            margin-bottom: 2rem;
-        }
-
-        @keyframes pulse-scale {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .loader-progress {
-            width: 300px;
-            height: 4px;
-            background: rgba(0, 255, 255, 0.2);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
-
-        .loader-bar {
-            height: 100%;
-            background: linear-gradient(90deg, 
-                var(--neon-cyan), 
-                var(--neon-purple));
-            border-radius: 2px;
-            width: 0%;
-            animation: loading-progress 3s ease-in-out forwards;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-        }
-
-        @keyframes loading-progress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
-        .loader-text {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 15px currentColor;
-            animation: text-flicker 1s ease-in-out infinite;
-        }
-
-        @keyframes text-flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        /* Special Effects */
-        .particle-system {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle-burst {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--neon-cyan);
-            border-radius: 50%;
-            animation: particle-explode 2s ease-out forwards;
-        }
-
-        @keyframes particle-explode {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Print Styles */
-        @media print {
-            .nav-container,
-            .theme-switcher,
-            .audio-visualizer,
-            .perf-metrics,
-            .scroll-progress,
-            .matrix-rain,
-            .floating-code,
-            .particle-system,
-            .cursor,
-            .cursor-trail {
-                display: none !important;
-            }
-            
-            body {
-                background: white !important;
-                color: black !important;
-            }
-            
-            .section-title,
-            .skill-title,
-            .project-title,
-            .contact-title {
-                color: black !important;
-                text-shadow: none !important;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loader" id="loader">
-        <div class="loader-logo">LUKE.DEV</div>
-        <div class="loader-progress">
-            <div class="loader-bar"></div>
-        </div>
-        <div class="loader-text">INITIALIZING QUANTUM SYSTEMS...</div>
-    </div>
-
     <!-- Scroll Progress -->
     <div class="scroll-progress">
         <div class="progress-fill-scroll" id="scroll-progress"></div>
@@ -2280,142 +1693,6 @@
                     </div>
                 </div>
             </div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">300%</div>
-                                <div class="metric-label">Speed Increase</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">99.9%</div>
-                                <div class="metric-label">Reliability</div>
-                            </div>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Selenium Matrix</span>
-                            <span class="tech-tag">AI Vision</span>
-                            <span class="tech-tag">Quantum Logic</span>
-                            <span class="tech-tag">Neural Networks</span>
-                        </div>
-                        <a href="#" class="project-link">
-                            EXPLORE QUANTUM PROJECT
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-visual">
-                        <div class="project-stats">
-                            <div class="stat-badge">SUB-SECOND DEPLOY</div>
-                            <div class="stat-badge">ZERO DOWNTIME</div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">HYPERLOOP CI/CD</h3>
-                        <p class="project-description">
-                            Ultra-fast deployment pipeline with intelligent test orchestration, achieving sub-second feedback loops, zero-downtime releases, and predictive failure prevention through ML algorithms.
-                        </p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <div class="metric-value">0.8s</div>
-                                <div class="metric-label">Feedback Time</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">100%</div>
-                                <div class="metric-label">Success Rate</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">24/7</div>
-                                <div class="metric-label">Availability</div>
-                            </div>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Kubernetes Mesh</span>
-                            <span class="tech-tag">Docker Fusion</span>
-                            <span class="tech-tag">Neural Pipeline</span>
-                            <span class="tech-tag">GitOps Advanced</span>
-                        </div>
-                        <a href="#" class="project-link">
-                            EXPLORE HYPERLOOP
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-visual">
-                        <div class="project-stats">
-                            <div class="stat-badge">AI POWERED</div>
-                            <div class="stat-badge">REAL-TIME</div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">QUANTUM API SENTINEL</h3>
-                        <p class="project-description">
-                            Advanced API testing suite with predictive failure detection, contract evolution tracking, autonomous security scanning, and real-time performance optimization using quantum algorithms.
-                        </p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <div class="metric-value">95%</div>
-                                <div class="metric-label">Threat Detection</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">500ms</div>
-                                <div class="metric-label">Response Time</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">∞</div>
-                                <div class="metric-label">Scalability</div>
-                            </div>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">GraphQL++</span>
-                            <span class="tech-tag">REST Evolution</span>
-                            <span class="tech-tag">Security AI</span>
-                            <span class="tech-tag">Quantum Logic</span>
-                        </div>
-                        <a href="#" class="project-link">
-                            EXPLORE SENTINEL
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-visual">
-                        <div class="project-stats">
-                            <div class="stat-badge">BLOCKCHAIN</div>
-                            <div class="stat-badge">WEB3</div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">WEB3 TEST ECOSYSTEM</h3>
-                        <p class="project-description">
-                            Cutting-edge blockchain testing framework supporting smart contract validation, DeFi protocol testing, and NFT marketplace quality assurance with quantum security verification.
-                        </p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <div class="metric-value">100%</div>
-                                <div class="metric-label">Security Score</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">1M+</div>
-                                <div class="metric-label">Transactions</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">0</div>
-                                <div class="metric-label">Vulnerabilities</div>
-                            </div>
-                        </div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Solidity</span>
-                            <span class="tech-tag">Ethereum</span>
-                            <span class="tech-tag">Smart Contracts</span>
-                            <span class="tech-tag">DeFi Testing</span>
-                        </div>
-                        <a href="#" class="project-link">
-                            EXPLORE WEB3
-                        </a>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <!-- Achievements Section -->
@@ -2543,13 +1820,7 @@
 
         function initializeQuantumSystems() {
             // Loading screen with quantum effects
-            setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loader').style.display = 'none';
-                    startQuantumAnimations();
-                }, 800);
-            }, 3000);
+            // Note: No loader in HTML, skipping or assuming it's removed
             
             // Initialize all subsystems
             initializeCursor();
@@ -2619,7 +1890,7 @@
                     });
                     
                     // Sound effect
-                    playHoverSound();
+                    if (window.playHoverSound) window.playHoverSound();
                 });
                 
                 element.addEventListener('mouseleave', () => {
@@ -2658,9 +1929,7 @@
                 matrixContainer.appendChild(column);
                 
                 setTimeout(() => {
-                    if (column.parentNode) {
-                        column.remove();
-                    }
+                    if (column.parentNode) column.remove();
                 }, 5000);
             }
             
@@ -2695,9 +1964,7 @@
                 container.appendChild(code);
                 
                 setTimeout(() => {
-                    if (code.parentNode) {
-                        code.remove();
-                    }
+                    if (code.parentNode) code.remove();
                 }, 20000);
             }
             
@@ -2722,7 +1989,7 @@
             document.getElementById('audio-viz').addEventListener('click', () => {
                 const viz = document.getElementById('audio-viz');
                 viz.style.transform = viz.style.transform === 'scale(1.1)' ? 'scale(1)' : 'scale(1.1)';
-                playClickSound();
+                if (window.playClickSound) window.playClickSound();
             });
         }
 
@@ -2734,17 +2001,17 @@
             
             cyberBtn.addEventListener('click', () => {
                 setTheme('cyber');
-                playClickSound();
+                if (window.playClickSound) window.playClickSound();
             });
             
             matrixBtn.addEventListener('click', () => {
                 setTheme('matrix');
-                playClickSound();
+                if (window.playClickSound) window.playClickSound();
             });
             
             neonBtn.addEventListener('click', () => {
                 setTheme('neon');
-                playClickSound();
+                if (window.playClickSound) window.playClickSound();
             });
         }
 
@@ -2803,7 +2070,7 @@
                             behavior: 'smooth',
                             block: 'start'
                         });
-                        playClickSound();
+                        if (window.playClickSound) window.playClickSound();
                     }
                 });
             });
@@ -2894,7 +2161,7 @@
             
             document.addEventListener('click', (e) => {
                 createParticleBurst(e.clientX, e.clientY);
-                playClickSound();
+                if (window.playClickSound) window.playClickSound();
             });
             
             function createParticleBurst(x, y) {
@@ -2902,26 +2169,31 @@
                 
                 for (let i = 0; i < 15; i++) {
                     const particle = document.createElement('div');
-                    particle.className = 'particle-burst';
+                    particle.style.position = 'fixed';
+                    particle.style.width = '4px';
+                    particle.style.height = '4px';
+                    particle.style.borderRadius = '50%';
+                    particle.style.pointerEvents = 'none';
                     particle.style.left = x + 'px';
                     particle.style.top = y + 'px';
                     particle.style.background = `var(${colors[Math.floor(Math.random() * colors.length)]})`;
                     
-                    const angle = (i / 15) * Math.PI * 2;
-                    const velocity = 150 + Math.random() * 100;
-                    const vx = Math.cos(angle) * velocity;
-                    const vy = Math.sin(angle) * velocity;
-                    
-                    particle.style.setProperty('--vx', vx + 'px');
-                    particle.style.setProperty('--vy', vy + 'px');
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 50 + 50;
+                    particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+                    particle.style.opacity = '0';
+                    particle.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
                     
                     particleContainer.appendChild(particle);
                     
                     setTimeout(() => {
-                        if (particle.parentNode) {
-                            particle.remove();
-                        }
-                    }, 2000);
+                        particle.style.opacity = '1';
+                        particle.style.transform = `translate(${Math.cos(angle) * (distance + 100)}px, ${Math.sin(angle) * (distance + 100)}px) scale(0)`;
+                    }, 10);
+                    
+                    setTimeout(() => {
+                        if (particle.parentNode) particle.remove();
+                    }, 1200);
                 }
             }
         }
@@ -2945,11 +2217,380 @@
                 neuralBg.appendChild(pulse);
                 
                 setTimeout(() => {
-                    if (pulse.parentNode) {
-                        pulse.remove();
-                    }
+                    if (pulse.parentNode) pulse.remove();
                 }, 3000);
             }
             
             setInterval(createNeuralPulse, 500);
         }
+
+        // Sound Effects System
+        function initializeSoundEffects() {
+            // Create audio context for sound effects
+            let audioContext;
+            
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                console.log('Web Audio API not supported');
+                return;
+            }
+            
+            window.playHoverSound = function() {
+                if (!audioContext) return;
+                
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            };
+            
+            window.playClickSound = function() {
+                if (!audioContext) return;
+                
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.2);
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.2);
+            };
+            
+            // Logo sound effect
+            document.getElementById('logo-sound').addEventListener('click', () => {
+                if (!audioContext) return;
+                
+                // Complex sound for logo
+                const frequencies = [440, 554.37, 659.25, 880];
+                frequencies.forEach((freq, index) => {
+                    setTimeout(() => {
+                        const osc = audioContext.createOscillator();
+                        const gain = audioContext.createGain();
+                        
+                        osc.connect(gain);
+                        gain.connect(audioContext.destination);
+                        
+                        osc.frequency.setValueAtTime(freq, audioContext.currentTime);
+                        gain.gain.setValueAtTime(0, audioContext.currentTime);
+                        gain.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.05);
+                        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                        
+                        osc.start(audioContext.currentTime);
+                        osc.stop(audioContext.currentTime + 0.4);
+                    }, index * 100);
+                });
+            });
+        }
+
+        // Performance Monitoring
+        function measurePerformance() {
+            const fpsCounter = document.getElementById('fps-counter');
+            const loadTimeElement = document.getElementById('load-time');
+            const memoryUsage = document.getElementById('memory-usage');
+            
+            // Calculate load time
+            const loadTime = ((performance.now() - loadStartTime) / 1000).toFixed(1);
+            loadTimeElement.textContent = loadTime + 's';
+            
+            // FPS monitoring
+            function updateFPS() {
+                frameCount++;
+                const now = performance.now();
+                const delta = now - lastTime;
+                
+                if (delta >= 1000) {
+                    const fps = Math.round((frameCount * 1000) / delta);
+                    fpsCounter.textContent = fps;
+                    frameCount = 0;
+                    lastTime = now;
+                }
+                
+                requestAnimationFrame(updateFPS);
+            }
+            
+            updateFPS();
+            
+            // Memory usage (if available)
+            if (performance.memory) {
+                setInterval(() => {
+                    const used = Math.round(performance.memory.usedJSHeapSize / 1024 / 1024);
+                    memoryUsage.textContent = used + 'MB';
+                }, 2000);
+            }
+        }
+
+        // Start quantum animations after loading
+        function startQuantumAnimations() {
+            // Add entrance animations to all cards
+            const cards = document.querySelectorAll('.skill-card, .project-card, .achievement-badge, .contact-card');
+            
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px) rotateX(45deg)';
+                card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0) rotateX(0)';
+                }, index * 200);
+            });
+            
+            // Add glow effects
+            const glowElements = document.querySelectorAll('.section-title, .hero-title, .skill-title, .project-title');
+            glowElements.forEach(element => {
+                element.style.animation += ', glow-pulse 4s ease-in-out infinite';
+            });
+        }
+
+        // Advanced Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Konami code easter egg
+            const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+            window.konamiIndex = window.konamiIndex || 0;
+            
+            if (e.keyCode === konamiCode[window.konamiIndex]) {
+                window.konamiIndex++;
+                if (window.konamiIndex === konamiCode.length) {
+                    activateQuantumMode();
+                    window.konamiIndex = 0;
+                }
+            } else {
+                window.konamiIndex = 0;
+            }
+            
+            // Other shortcuts
+            switch(e.key) {
+                case 'h':
+                    if (e.ctrlKey) {
+                        e.preventDefault();
+                        document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+                    }
+                    break;
+                case 's':
+                    if (e.ctrlKey) {
+                        e.preventDefault();
+                        document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
+                    }
+                    break;
+                case 'p':
+                    if (e.ctrlKey) {
+                        e.preventDefault();
+                        document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+                    }
+                    break;
+                case 'c':
+                    if (e.ctrlKey) {
+                        e.preventDefault();
+                        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                    }
+                    break;
+                case 'Escape':
+                    // Reset all animations
+                    document.querySelectorAll('*').forEach(el => {
+                        el.style.animation = el.style.animation.replace(/quantum-mode[^,]*(,|$)/g, '');
+                    });
+                    break;
+            }
+        });
+
+        // Secret Quantum Mode
+        function activateQuantumMode() {
+            document.body.style.animation = 'quantum-glitch 5s ease-in-out';
+            
+            // Add quantum styles
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes quantum-glitch {
+                    0%, 100% { filter: hue-rotate(0deg) contrast(1); }
+                    20% { filter: hue-rotate(90deg) contrast(1.5) brightness(1.2); }
+                    40% { filter: hue-rotate(180deg) contrast(0.8) brightness(0.8); }
+                    60% { filter: hue-rotate(270deg) contrast(1.3) brightness(1.1); }
+                    80% { filter: hue-rotate(360deg) contrast(1.1) brightness(0.9); }
+                }
+                
+                @keyframes glow-pulse {
+                    0%, 100% { 
+                        text-shadow: 0 0 20px currentColor, 0 0 40px currentColor; 
+                    }
+                    50% { 
+                        text-shadow: 0 0 40px currentColor, 0 0 80px currentColor, 0 0 120px currentColor; 
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Create quantum particles
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.style.cssText = `
+                        position: fixed;
+                        top: ${Math.random() * 100}vh;
+                        left: ${Math.random() * 100}vw;
+                        width: 2px;
+                        height: 2px;
+                        background: hsl(${Math.random() * 360}, 70%, 70%);
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 9999;
+                        animation: quantum-particle 3s ease-out forwards;
+                        box-shadow: 0 0 10px currentColor;
+                    `;
+                    
+                    const keyframes = `
+                        @keyframes quantum-particle {
+                            0% { transform: scale(0) rotate(0deg); opacity: 0; }
+                            50% { transform: scale(3) rotate(180deg); opacity: 1; }
+                            100% { transform: scale(0) rotate(360deg); opacity: 0; }
+                        }
+                    `;
+                    
+                    if (!document.querySelector('#quantum-keyframes')) {
+                        const keyframeStyle = document.createElement('style');
+                        keyframeStyle.id = 'quantum-keyframes';
+                        keyframeStyle.textContent = keyframes;
+                        document.head.appendChild(keyframeStyle);
+                    }
+                    
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        if (particle.parentNode) particle.remove();
+                    }, 3000);
+                }, i * 50);
+            }
+            
+            // Play quantum sound
+            if (window.playClickSound) {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => window.playClickSound(), i * 200);
+                }
+            }
+            
+            setTimeout(() => {
+                document.body.style.animation = '';
+                style.remove();
+            }, 5000);
+        }
+
+        // Mobile optimizations
+        if (window.innerWidth <= 768) {
+            // Disable heavy animations on mobile
+            document.documentElement.style.setProperty('--reduced-motion', '1');
+            
+            // Simplify effects
+            const heavyElements = document.querySelectorAll('.matrix-rain, .floating-code-container, .audio-visualizer, .perf-metrics');
+            heavyElements.forEach(el => {
+                if (el) el.style.display = 'none';
+            });
+        }
+
+        // Service Worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                const CACHE_NAME = 'quantum-portfolio-v1';
+                const urlsToCache = [
+                    '/',
+                    '/styles.css',
+                    '/script.js'
+                ];
+
+                self.addEventListener('install', (event) => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then((cache) => cache.addAll(urlsToCache))
+                    );
+                });
+
+                self.addEventListener('fetch', (event) => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then((response) => {
+                                return response || fetch(event.request);
+                            })
+                    );
+                });
+            `;
+
+            const blob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(blob);
+            
+            navigator.serviceWorker.register(swUrl)
+                .then((registration) => {
+                    console.log('Quantum Portfolio SW registered:', registration);
+                })
+                .catch((error) => {
+                    console.log('SW registration failed:', error);
+                });
+        }
+
+        // Initialize quantum effects on specific elements
+        setTimeout(() => {
+            document.querySelectorAll('.skill-card, .project-card').forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('holographic');
+                }, index * 500);
+            });
+            
+            document.querySelectorAll('.tech-tag').forEach((tag, index) => {
+                setTimeout(() => {
+                    tag.classList.add('data-stream');
+                }, index * 100);
+            });
+        }, 4000);
+
+        // Console Easter Egg
+        console.log(`
+        ████████╗███████╗███████╗████████╗    ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗████████╗██╗   ██╗███╗   ███╗
+        ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝   ██╔═══██╗██║   ██║██╔══██╗████╗  ██║╚══██╔══╝██║   ██║████╗ ████║
+           ██║   █████╗  ███████╗   ██║      ██║   ██║██║   ██║███████║██╔██╗ ██║   ██║   ██║   ██║██╔████╔██║
+           ██║   ██╔══╝  ╚════██║   ██║      ██║▄▄ ██║██║   ██║██╔══██║██║╚██╗██║   ██║   ██║   ██║██║╚██╔╝██║
+           ██║   ███████╗███████║   ██║      ╚██████╔╝╚██████╔╝██║  ██║██║ ╚████║   ██║   ╚██████╔╝██║ ╚═╝ ██║
+           ╚═╝   ╚══════╝╚══════╝   ╚═╝       ╚══▀▀═╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝
+           
+        🚀 Welcome to the Quantum Portfolio! 
+        
+        Try these console commands:
+        - activateQuantumMode() - Enable quantum effects
+        - setTheme('cyber'|'matrix'|'neon') - Change theme
+        - Type Konami code (↑↑↓↓←→←→BA) for surprise!
+        
+        Keyboard shortcuts:
+        - Ctrl+H: Home
+        - Ctrl+S: Skills  
+        - Ctrl+P: Projects
+        - Ctrl+C: Contact
+        - ESC: Reset animations
+        
+        Made with ⚡ Quantum Technology by Luke James
+        `);
+
+        // Expose functions globally for console access
+        window.activateQuantumMode = activateQuantumMode;
+        window.setTheme = setTheme;
+
+        // Final initialization message
+        console.log('%c🎯 Quantum Portfolio Systems Online!', 'color: #00ffff; font-size: 16px; font-weight: bold;');
+    </script>
+</body>
+</html>
