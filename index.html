@@ -310,19 +310,35 @@
                 left: 1rem;
             }
 
-            .experience-item,
-            .experience-item:nth-child(even) {
-                flex-direction: column;
+            .experience-item {
+                flex-direction: column !important;
+                align-items: flex-start;
             }
 
-            .experience-content,
+            .experience-item:nth-child(even) {
+                flex-direction: column !important;
+            }
+
+            .experience-content {
+                width: 100%;
+                padding-right: 0;
+                padding-left: 2.5rem;
+            }
+
             .experience-item:nth-child(even) .experience-content {
                 width: 100%;
-                text-align: left;
+                padding-right: 0;
+                padding-left: 2.5rem;
             }
 
             .timeline-dot {
                 left: 1rem;
+                transform: translateX(0);
+            }
+
+            .experience-item:nth-child(even) .timeline-dot {
+                left: 1rem;
+                transform: translateX(0);
             }
 
             .experience-item:nth-child(even) .experience-desc li {
@@ -383,7 +399,7 @@
             <p class="text-2xl mb-8 opacity-90 animate-fade-in" style="animation-delay: 0.2s;">Test Lead & QA Automation Engineer</p>
             <div class="flex justify-center gap-4 flex-wrap">
                 <a href="#contact" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-opacity-90 transition-all hover-scale glow-effect animate-fade-in" style="animation-delay: 0.4s;">Get in Touch</a>
-                <a href="/Luke_James_CV.pdf" download class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all hover-scale glow-effect animate-fade-in" style="animation-delay: 0.5s;">Download CV</a>
+                <a href="/PersonalPortfolio/Luke_James_CV.pdf" download class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all hover-scale glow-effect animate-fade-in" style="animation-delay: 0.5s;">Download CV</a>
             </div>
         </div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30v4h-4v2h4v4h2v-4h4v-2h-4V4h-2zM6 34v4h4v-4h4v-2h-4v-4h-2v4H6v2zm0-30v2h4v4h2V6h4V4H6v2z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] animate-pulse opacity-20"></div>
@@ -509,11 +525,11 @@
                 <div class="absolute top-0 bottom-0 left-1/2 w-1 bg-gradient-to-b from-blue-600 to-cyan-400 -translate-x-1/2"></div>
                 <div class="space-y-12">
                     <div class="flex relative experience-item animate-fade-in">
-                        <div class="w-1/2 pr-8 glass p-6 rounded-lg hover-scale neon-border">
+                        <div class="experience-content w-1/2 pr-8 glass p-6 rounded-lg hover-scale neon-border">
                             <div class="text-sm text-gray-500">Apr 2023 – Present</div>
                             <h3 class="text-xl font-semibold text-gray-800">Test Lead</h3>
                             <div class="text-blue-600">Nationwide Building Society – Swindon</div>
-                            <ul class="mt-4 space-y-2">
+                            <ul class="mt-4 space-y-2 experience-desc">
                                 <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Led QA for buy-to-let mortgages scrum team.</li>
                                 <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Designed test strategies for a strategic programme.</li>
                                 <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Managed 6 engineers, leading stand-ups and sprint planning.</li>
@@ -526,16 +542,16 @@
                         </div>
                         <div class="absolute top-6 left-1/2 w-5 h-5 bg-cyan-400 rounded-full timeline-dot -translate-x-1/2 glow-effect"></div>
                     </div>
-                    <div class="flex relative experience-item flex-row-reverse animate-fade-in" style="animation-delay: 0.2s;">
-                        <div class="w-1/2 pl-8 glass p-6 rounded-lg hover-scale neon-border">
+                    <div class="flex relative experience-item animate-fade-in" style="animation-delay: 0.2s;">
+                        <div class="experience-content w-1/2 pl-8 glass p-6 rounded-lg hover-scale neon-border">
                             <div class="text-sm text-gray-500">Aug 2021 – Apr 2023</div>
                             <h3 class="text-xl font-semibold text-gray-800">Test Engineer / Test Lead</h3>
                             <div class="text-blue-600">Nationwide Building Society – Swindon</div>
-                            <ul class="mt-4 space-y-2">
-                                <li class="relative pr-6"><span class="absolute right-0 text-cyan-400">✓</span>Built API automation with C#/.NET, SpecFlow, RestSharp.</li>
-                                <li class="relative pr-6"><span class="absolute right-0 text-cyan-400">✓</span>Introduced Zephyr Scale for test management.</li>
-                                <li class="relative pr-6"><span class="absolute right-0 text-cyan-400">✓</span>Tested in AWS with Kubernetes clusters.</li>
-                                <li class="relative pr-6"><span class="absolute right-0 text-cyan-400">✓</span>Promoted agile best practices.</li>
+                            <ul class="mt-4 space-y-2 experience-desc">
+                                <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Built API automation with C#/.NET, SpecFlow, RestSharp.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Introduced Zephyr Scale for test management.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Tested in AWS with Kubernetes clusters.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Promoted agile best practices.</li>
                             </ul>
                             <div class="progress-bar mt-4 h-2 bg-gray-200 rounded-full overflow-hidden">
                                 <div class="progress-fill bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full" style="--progress-width: 90%;"></div>
@@ -544,11 +560,11 @@
                         <div class="absolute top-6 left-1/2 w-5 h-5 bg-cyan-400 rounded-full timeline-dot -translate-x-1/2 glow-effect"></div>
                     </div>
                     <div class="flex relative experience-item animate-fade-in" style="animation-delay: 0.4s;">
-                        <div class="w-1/2 pr-8 glass p-6 rounded-lg hover-scale neon-border">
+                        <div class="experience-content w-1/2 pr-8 glass p-6 rounded-lg hover-scale neon-border">
                             <div class="text-sm text-gray-500">Jul 2018 – Aug 2021</div>
                             <h3 class="text-xl font-semibold text-gray-800">Quality Assurance Engineer</h3>
                             <div class="text-blue-600">Cherwell Software – Swindon</div>
-                            <ul class="mt-4 space-y-2">
+                            <ul class="mt-4 space-y-2 experience-desc">
                                 <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Created 300+ automation tests with Selenium, Ranorex.</li>
                                 <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Implemented TDD to reduce defects.</li>
                                 <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Cherwell Values Award (2020).</li>
@@ -560,16 +576,16 @@
                         </div>
                         <div class="absolute top-6 left-1/2 w-5 h-5 bg-cyan-400 rounded-full timeline-dot -translate-x-1/2 glow-effect"></div>
                     </div>
-                    <div class="flex relative experience-item flex-row-reverse animate-fade-in" style="animation-delay: 0.6s;">
-                        <div class="w-1/2 pl-8 glass p-6 rounded-lg hover-scale neon-border">
+                    <div class="flex relative experience-item animate-fade-in" style="animation-delay: 0.6s;">
+                        <div class="experience-content w-1/2 pl-8 glass p-6 rounded-lg hover-scale neon-border">
                             <div class="text-sm text-gray-500">Aug 2014 – Jul 2018</div>
                             <h3 class="text-xl font-semibold text-gray-800">Tier 3 Senior Product Support Analyst</h3>
                             <div class="text-blue-600">Cherwell Software – Swindon</div>
-                            <ul class="mt-4 space-y-2">
-                                <li class="relative pr-6"><span class="absolute right-0 text-cyan-400">✓</span>Led escalations for enterprise clients.</li>
-                                <li class="relative pr-6"><span class="absolute right-0 text-cyan-400">✓</span>Produced RCA for P1 incidents.</li>
-                                <li class="relative pr-6"><span class="absolute right-0 text-cyan-400">✓</span>Global Hero Award.</li>
-                                <li class="relative pr-6"><span class="absolute right-0 text-cyan-400">✓</span>Mentored Tier 1 and 2 analysts.</li>
+                            <ul class="mt-4 space-y-2 experience-desc">
+                                <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Led escalations for enterprise clients.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Produced RCA for P1 incidents.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Global Hero Award.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Mentored Tier 1 and 2 analysts.</li>
                             </ul>
                             <div class="progress-bar mt-4 h-2 bg-gray-200 rounded-full overflow-hidden">
                                 <div class="progress-fill bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full" style="--progress-width: 80%;"></div>
@@ -578,11 +594,11 @@
                         <div class="absolute top-6 left-1/2 w-5 h-5 bg-cyan-400 rounded-full timeline-dot -translate-x-1/2 glow-effect"></div>
                     </div>
                     <div class="flex relative experience-item animate-fade-in" style="animation-delay: 0.8s;">
-                        <div class="w-1/2 pr-8 glass p-6 rounded-lg hover-scale neon-border">
+                        <div class="experience-content w-1/2 pr-8 glass p-6 rounded-lg hover-scale neon-border">
                             <div class="text-sm text-gray-500">Dec 2011 – Aug 2014</div>
                             <h3 class="text-xl font-semibold text-gray-800">IT Service Desk Analyst</h3>
                             <div class="text-blue-600">UK Shared Business Services – Swindon</div>
-                            <ul class="mt-4 space-y-2">
+                            <ul class="mt-4 space-y-2 experience-desc">
                                 <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>1st line IT support with Active Directory, Exchange.</li>
                                 <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Incident Manager role.</li>
                                 <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>ITIL Foundation certification.</li>
@@ -593,14 +609,14 @@
                         </div>
                         <div class="absolute top-6 left-1/2 w-5 h-5 bg-cyan-400 rounded-full timeline-dot -translate-x-1/2 glow-effect"></div>
                     </div>
-                    <div class="flex relative experience-item flex-row-reverse animate-fade-in" style="animation-delay: 1s;">
-                        <div class="w-1/2 pl-8 glass p-6 rounded-lg hover-scale neon-border">
+                    <div class="flex relative experience-item animate-fade-in" style="animation-delay: 1s;">
+                        <div class="experience-content w-1/2 pl-8 glass p-6 rounded-lg hover-scale neon-border">
                             <div class="text-sm text-gray-500">Dec 2011 – Aug 2014</div>
                             <h3 class="text-xl font-semibold text-gray-800">Apprentice – Finance & Procurement</h3>
                             <div class="text-blue-600">UK Shared Business Services – Swindon</div>
-                            <ul class="mt-4 space-y-2">
-                                <li class="relative pr-6"><span class="absolute right-0 text-cyan-400">✓</span>Handled escalations and invoice processing.</li>
-                                <li class="relative pr-6"><span class="absolute right-0 text-cyan-400">✓</span>Quality Monitoring Award.</li>
+                            <ul class="mt-4 space-y-2 experience-desc">
+                                <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Handled escalations and invoice processing.</li>
+                                <li class="relative pl-6"><span class="absolute left-0 text-cyan-400">✓</span>Quality Monitoring Award.</li>
                             </ul>
                             <div class="progress-bar mt-4 h-2 bg-gray-200 rounded-full overflow-hidden">
                                 <div class="progress-fill bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full" style="--progress-width: 70%;"></div>
@@ -659,7 +675,7 @@
             <p class="text-lg text-center max-w-xl mx-auto mb-8 animate-fade-in" style="animation-delay: 0.2s;">
                 I'm open to new opportunities and collaborations. Let's connect!
             </p>
-            <div class="flex justify-center space-x-8 flex-wrap animate-fade-in" style="animation-delay: 0.4s;">
+            <div class="flex justify-center space-x-8 flex-wrap animate-fade-in contact-info" style="animation-delay: 0.4s;">
                 <a href="tel:07881376794" class="flex items-center text-gray-800 hover:text-blue-600 transition-all glow-effect">
                     <span class="mr-2">📞</span> 07881 376794
                 </a>
@@ -669,7 +685,7 @@
                 <a href="https://www.linkedin.com/in/lukejames27/" target="_blank" class="flex items-center text-gray-800 hover:text-blue-600 transition-all glow-effect">
                     <span class="mr-2">🔗</span> LinkedIn
                 </a>
-                <a href="/Luke_James_CV.pdf" download class="flex items-center text-gray-800 hover:text-blue-600 transition-all glow-effect">
+                <a href="/PersonalPortfolio/Luke_James_CV.pdf" download class="flex items-center text-gray-800 hover:text-blue-600 transition-all glow-effect">
                     <span class="mr-2">📄</span> Download CV
                 </a>
             </div>
@@ -811,3 +827,5 @@
             });
         });
     </script>
+</body>
+</html>
