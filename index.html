@@ -742,16 +742,19 @@
             });
         });
 
-        // Smooth Scrolling for Navigation Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        // Smooth Scrolling for Navigation Links (only header nav links)
+        document.querySelectorAll('header .nav-menu a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
-                if (href.startsWith('#') && href !== '#' && document.querySelector(href)) {
+                if (document.querySelector(href)) {
                     e.preventDefault();
                     document.querySelector(href).scrollIntoView({
                         behavior: 'smooth'
                     });
                 }
+            });
+        });
+}
             });
         });
 
